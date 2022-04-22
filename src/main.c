@@ -7,7 +7,7 @@
 
 static const unsigned int WINDOW_WIDTH = 800;
 static const unsigned int WINDOW_HEIGHT = 800;
-static const unsigned int BIT_PER_PIXEL = 32;
+//static const unsigned int BIT_PER_PIXEL = 32;
 
 int main(int argc, char** argv)
 {
@@ -18,7 +18,7 @@ int main(int argc, char** argv)
     }
 
     // Creation de la fenetre SDL
-    SDL_Window* window = SDL_CreateWindow("Raytracer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
+    SDL_Window* window = SDL_CreateWindow("Square_dash", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
     if(window == NULL) {
         fprintf(stderr, "Impossible de créer la fenêtre. Fin du programme.\n");
         return EXIT_FAILURE;

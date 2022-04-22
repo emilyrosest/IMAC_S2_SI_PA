@@ -10,7 +10,7 @@ OBJ_DIR	= obj
 
 SRC_FILES 	= $(shell find $(SRC_DIR)/ -type f -name '*.c')
 OBJ_FILES 	= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o, $(SRC_FILES))
-EXEC_BIN	= game.out
+EXEC_BIN	= main
 
 
 all : $(OBJ_FILES)
