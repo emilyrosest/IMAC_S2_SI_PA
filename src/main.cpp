@@ -17,7 +17,9 @@ static const float GL_VIEW_SIZE = 2.;
 /* Nombre minimal de millisecondes separant le rendu de deux images */
 static const Uint32 FRAMERATE_MILLISECONDS = 1000 / 60;
 
-Square* newSquare = nullptr;
+//Square* newSquare = nullptr;
+Square newSquare(1, 0.5, 0.5, 0.5, 0.5, 1., 0., 0.);
+
 
 static float aspectRatio;
 
@@ -115,9 +117,7 @@ int main(int argc, char** argv)
         glClear(GL_COLOR_BUFFER_BIT);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-
-        Square newSquare(1, 10., 10., 10., 10., 1., 0., 0.);
-    
+        
         newSquare.drawSquare(1);
         
         /* Echange du front et du back buffer : mise a jour de la fenetre */
