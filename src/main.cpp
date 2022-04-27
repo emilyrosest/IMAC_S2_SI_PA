@@ -4,6 +4,10 @@
 
 //include les nouveaux fichiers!!
 #include "game.h"
+#include "square.h"
+
+
+Square* newSquare = nullptr;
 
 static const unsigned int WINDOW_WIDTH = 800;
 static const unsigned int WINDOW_HEIGHT = 800;
@@ -39,6 +43,12 @@ int main(int argc, char** argv)
     // Fonctions pour jouer
     printf("%d", test());
 
+    //test d'afficher un square
+
+    *newSquare = Square(1, 10., 10., 10., 10., 1., 0., 0.);
+    
+    newSquare->drawSquare(0);
+
 
     int loop = 1;
     while(loop) {
@@ -60,3 +70,4 @@ int main(int argc, char** argv)
 
     return EXIT_SUCCESS;
 }
+
