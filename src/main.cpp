@@ -12,6 +12,7 @@
 #include "main.hpp"
 #include "game.hpp"
 
+
 Game* game = nullptr;
 
 //Map *map = nullptr;
@@ -31,7 +32,6 @@ int main(int argc, char** argv)
         game->swap();
         game->handleEvents();
         game->refresh();
-        
         
 
         //marche pas, erreur de segmentation lorsque affichage de texture

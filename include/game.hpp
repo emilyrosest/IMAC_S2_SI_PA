@@ -7,6 +7,7 @@
 
 //#include "square.hpp"
 #include "player.hpp"
+#include "quadtree.hpp"
 
 static const char WINDOW_TITLE[] = "Square Dash";
 
@@ -45,6 +46,8 @@ public :
     static SDL_Renderer *renderer;
 
     Player *thomas_the_player;
+
+    QuadTree *quadtree;
 
 private :
 

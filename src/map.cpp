@@ -3,9 +3,18 @@
 
 #include "../include/map.hpp"
 
+
 Map::Map() {
 }
 
+
+
+
+
+
+
+////////////////////////////////////AFFICHAGE TEXTURE ET FOND////////////////////////////////////////////////
+/*
 void Map::InitMap(){
 
     background = IMG_Load("assets/background.png");
@@ -60,7 +69,7 @@ void Map::drawMap() {
     
     
 }
-
+*/
 
 
 

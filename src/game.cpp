@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include "map.hpp"
 
+
 #include <iostream>
 /*code fonctionne pour fenêtre en petit écran, lorsque grand écran ca crash -> erreur au niveau de l'initailisation de la SDL que j'ai pas trouvé*/
 
@@ -10,7 +11,9 @@ SDL_Renderer *Game::renderer = nullptr;
 Game::Game() {
 
     thomas_the_player = new Player(0.0, 0.0, 0.2, 0.4, Color());
-    
+    QuadTree* quadtree = new QuadTree(Position(-20., 20.), Position(20., -20.));
+
+    this->quadtree->insertAllDecor();
 
     /* Initialisation de la SDL */
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -50,6 +53,9 @@ Game::Game() {
     }    
     onWindowResized(WINDOW_WIDTH, WINDOW_HEIGHT);
     
+    //Agrandir les mesures de la fenêtre
+    //glScale(0.1, 0.1, 0.)
+
     isRunning = 1;
 }
 
