@@ -5,9 +5,11 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "square.hpp"
+//#include "square.hpp"
+#include "player.hpp"
 
 static const char WINDOW_TITLE[] = "Square Dash";
+
 /* Espace fenetre virtuelle */
 static const float GL_VIEW_SIZE = 2.;
 
@@ -16,7 +18,7 @@ public :
 
     Game();
 
-    ~Game() {};
+    //~Game(){};
 
     void setRunning(int newState) { isRunning = newState; }
 
@@ -36,8 +38,13 @@ public :
     static const unsigned int WINDOW_WIDTH = 800;
     static const unsigned int WINDOW_HEIGHT = 600;
     
+    //Renderer
 
     SDL_Event e;
+
+    static SDL_Renderer *renderer;
+
+    Player *thomas_the_player;
 
 private :
 

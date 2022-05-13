@@ -1,18 +1,11 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "main.hpp"
+
 #include "square.hpp"
-#include "game.hpp"
-
-const int MOVE_LEFT = 1;
-const int MOVE_RIGHT = 2;
-const int JUMP = 3;
-
-//float X_STARTING_POS = 0.2; // a changer
-//float Y_STARTING_POS = 0.;
 
 
 class Map {
@@ -25,17 +18,18 @@ public :
 
     static const int MAP_HEIGHT = 1000;
 
+    void InitMap();
+
     void drawMap();
 
-    void loadPlayer();
+    //void cleanMap();
 
-    void handleEvents();
-
-    void updateThomasPosition(int direction);
-
-    void jump();
-
+    //void handleEvents(); /à voir si besoin ici*/
 
 private :
-    Square* thomas;
+    
+    SDL_Surface *background;
+
+    GLuint texture;
+
 };

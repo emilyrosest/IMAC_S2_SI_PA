@@ -1,14 +1,17 @@
-#include <SDL2/SDL.h>
-#include <stdlib.h>
-#include <stdio.h>
-
 #include "game.hpp"
-#include "square.hpp"
 #include "map.hpp"
 
-Map *map = nullptr;
+#include <iostream>
+/*code fonctionne pour fenêtre en petit écran, lorsque grand écran ca crash -> erreur au niveau de l'initailisation de la SDL que j'ai pas trouvé*/
+
+SDL_Renderer *Game::renderer = nullptr;
+
 
 Game::Game() {
+
+    thomas_the_player = new Player(0.0, 0.0, 0.2, 0.4, Color());
+    
+
     /* Initialisation de la SDL */
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         const char* error = SDL_GetError();
@@ -28,11 +31,14 @@ Game::Game() {
         }
     }
     
+    SDL_GLContext context;
     {
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
             SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
         context = SDL_GL_CreateContext(window);
+        
         if(NULL == context) 
         {
             const char* error = SDL_GetError();
@@ -43,11 +49,7 @@ Game::Game() {
         }
     }    
     onWindowResized(WINDOW_WIDTH, WINDOW_HEIGHT);
-
-    //explorationInterface = new ExplorationInterface(this);
-    //explorationInterface = new ExplorationInterface();
-    //map = explorationInterface->getMap();
-
+    
     isRunning = 1;
 }
 
@@ -86,26 +88,26 @@ void Game::handleEvents() {
                 
             /* Touche clavier */
             case SDL_KEYDOWN:
-                //printf("touche pressee (code = %d)\n", e.key.keysym.sym);
-                //map->handleEvents();
+
                 switch (e.key.keysym.sym) { // Quelle touche est appuyée ?
                     case SDLK_q:
                     case SDLK_LEFT:
-                        map->updateThomasPosition(MOVE_LEFT);
-                        //printf("bouger");
+                        this->thomas_the_player->updateThomasPosition(MOVE_LEFT);
                         printf("pret a bouger lol \n");
+                        //printf("%f\n", this->thomas_the_player->position.x);
                         break;
+
                     case SDLK_d:
                     case SDLK_RIGHT:
-                        map->updateThomasPosition(MOVE_RIGHT);
+                        this->thomas_the_player->updateThomasPosition(MOVE_RIGHT);
+                        printf("pret a bouger lol \n");
+                        //printf("%f\n", this->thomas_the_player->position.x);
                         break;
                     case SDLK_SPACE:
                     case SDLK_z:
                     case SDLK_UP:
-                        map->updateThomasPosition(JUMP);
-                    //case SDLK_m:
-                        //map->toggleCamera();
-                        //break;
+                        this->thomas_the_player->updateThomasPosition(JUMP);
+                        printf("pret a sauter\n");
                     default:
                         break;
                 }
@@ -118,16 +120,26 @@ void Game::handleEvents() {
 }
 
 void Game::refresh() {
-    //map->handleEvents();
-    map->drawMap();
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    this->thomas_the_player->drawPlayer();
+    
+
+    //SDL_GL_SwapWindow(window);
+
 }
 
 void Game::clean() {
+
+
     /* Liberation des ressources associees a la SDL */ 
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(window);
     SDL_Quit();
     
+
     //return EXIT_SUCCESS;
 }
 

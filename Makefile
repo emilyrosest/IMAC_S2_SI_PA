@@ -1,7 +1,7 @@
 CC		= g++
 CFLAGS	= -Wall -O2 -g
 
-LDFLAGS	=  -lSDL2main -lSDL2 -lGL -lGLU 
+LDFLAGS	=  -lSDL2main -lSDL2 -lGL -lGLU -lSDL2_image
 
 BIN_DIR	= bin
 INC_DIR = -I include
@@ -24,3 +24,4 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 
 clean :
 	rm -rf *~
+	rm -r obj/*
