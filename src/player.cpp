@@ -58,3 +58,4 @@ void Player::jump() {
     this->position.y += 0.1;
     //pas fini
 }
+

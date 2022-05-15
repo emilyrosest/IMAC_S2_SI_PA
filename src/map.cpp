@@ -4,11 +4,14 @@
 #include "../include/map.hpp"
 
 
+
 Map::Map() {
 }
 
 
+void Map::drawMap() {
 
+}
 
 
 

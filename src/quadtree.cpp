@@ -26,6 +26,15 @@ void drawBox(AABB box) {
     glEnd();
 }
 
+bool collision(AABB box1, AABB box2) {
+    if((box2.position.x >= box1.position.x + box1.weight)      // trop à droite
+    || (box2.position.x + box2.weight <= box1.position.x) // trop à gauche
+    || (box2.position.y >= box1.position.y + box1.height) // trop en bas
+    || (box2.position.y + box2.height <= box1.position.y))  // trop en haut
+          return false; 
+   else
+          return true; 
+}
 
 void QuadTree::initNodes() {
     if (topLeftTree == nullptr) {
@@ -79,6 +88,7 @@ void QuadTree::insertBox(AABB* box) {
     if (isLeaf() && boxCount < 4) {
         boxes[boxCount] = box;
         boxCount++;
+        glColor3f(0.4, 0.5, 0.2);
         drawBox(*box);
         return;
     } 
@@ -99,13 +109,13 @@ void QuadTree::insertBox(AABB* box) {
         insertAtGoodPlace(box);
     } 
 }
-
+/*
 //Peut-être le bouger si besoin
 void QuadTree::insertAllDecor() {
     for (int i = 0; i < MAX_DECOR_COUNT; i++) {
         insertBox(&allDecor[i]);
     }
-}
+} */
 
 QuadTree* QuadTree::search(Position pos) {
     if (isLeaf()) {

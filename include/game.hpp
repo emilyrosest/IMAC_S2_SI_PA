@@ -8,6 +8,7 @@
 //#include "square.hpp"
 #include "player.hpp"
 #include "quadtree.hpp"
+#include "map.hpp"
 
 static const char WINDOW_TITLE[] = "Square Dash";
 
@@ -31,7 +32,7 @@ public :
 
     void swap() { SDL_GL_SwapWindow(window); };
 
-    void handleEvents();
+    //void handleEvents();
 
     void onWindowResized(unsigned int width, unsigned int height);
 
@@ -49,6 +50,25 @@ public :
 
     QuadTree *quadtree;
 
+    bool starting() {
+        if (activity == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    bool gaming() {
+        if (activity == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    void setActivity (int newActivity) { activity = newActivity; };
+
+    void changeInterfaceToGaming() { setActivity(1); };
+
+
 private :
 
     int isRunning = 0;
@@ -56,4 +76,6 @@ private :
     SDL_Window* window;
 
     SDL_GLContext context;
+
+    int activity = 0;
 };

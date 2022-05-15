@@ -8,6 +8,7 @@
 #include "square.hpp"
 
 
+
 class Map {
 public :
     Map();

@@ -30,7 +30,7 @@ int main(int argc, char** argv)
         /* Echange du front et du back buffer : mise a jour de la fenetre */
         
         game->swap();
-        game->handleEvents();
+        //game->handleEvents();
         game->refresh();
         
 

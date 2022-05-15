@@ -1,19 +1,34 @@
 #include "game.hpp"
-#include "map.hpp"
+//#include "map.hpp"
+
+//#include "quadtree.hpp"
+
+#include "startingInterface.hpp"
+#include "gamingInterface.hpp"
 
 
 #include <iostream>
 /*code fonctionne pour fenêtre en petit écran, lorsque grand écran ca crash -> erreur au niveau de l'initailisation de la SDL que j'ai pas trouvé*/
 
 SDL_Renderer *Game::renderer = nullptr;
+//....
+Map *map = nullptr;
 
+StartingInterface* startingInterface = nullptr;
+GamingInterface* gamingInterface = nullptr;
 
 Game::Game() {
 
-    thomas_the_player = new Player(0.0, 0.0, 0.2, 0.4, Color());
+    glScalef(0.1, 0.1, 0.);
+
+    thomas_the_player = new Player(0.0, 0.0, 2., 4., Color());
     QuadTree* quadtree = new QuadTree(Position(-20., 20.), Position(20., -20.));
 
-    this->quadtree->insertAllDecor();
+    //this->quadtree->insertAllDecor();
+    //quadtree->insertAllDecor();
+    //marche pas
+    AABB boxx = createAABB(Position(0.3, 0.3), 3., 1.);
+    quadtree->insertBox(&boxx);
 
     /* Initialisation de la SDL */
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -51,6 +66,10 @@ Game::Game() {
             //return EXIT_FAILURE;
         }
     }    
+
+    startingInterface = new StartingInterface(this);
+    gamingInterface = new GamingInterface(this);
+
     onWindowResized(WINDOW_WIDTH, WINDOW_HEIGHT);
     
     //Agrandir les mesures de la fenêtre
@@ -59,81 +78,31 @@ Game::Game() {
     isRunning = 1;
 }
 
-void Game::handleEvents() {
-    while(SDL_PollEvent(&e)) {
-        /* L'utilisateur ferme la fenetre : */
-		if(e.type == SDL_QUIT) {
-			setRunning(0);
-			break;
-		}
-		
-		if(	e.type == SDL_KEYDOWN && (e.key.keysym.sym == SDLK_q || e.key.keysym.sym == SDLK_ESCAPE)) {
-			setRunning(0);
-			break;
-		}
-            
-        switch(e.type) 
-        {
-            case SDL_WINDOWEVENT:
-                switch (e.window.event) 
-                {
-                    /* Redimensionnement fenetre */
-                    case SDL_WINDOWEVENT_RESIZED:
-                        onWindowResized(e.window.data1, e.window.data2);                
-                        break;
 
-                    default:
-                        break; 
-                }
-                break;
-
-            /* Clic souris */
-            case SDL_MOUSEBUTTONUP:
-                printf("clic en (%d, %d)\n", e.button.x, e.button.y);
-                break;
-                
-            /* Touche clavier */
-            case SDL_KEYDOWN:
-
-                switch (e.key.keysym.sym) { // Quelle touche est appuyée ?
-                    case SDLK_q:
-                    case SDLK_LEFT:
-                        this->thomas_the_player->updateThomasPosition(MOVE_LEFT);
-                        printf("pret a bouger lol \n");
-                        //printf("%f\n", this->thomas_the_player->position.x);
-                        break;
-
-                    case SDLK_d:
-                    case SDLK_RIGHT:
-                        this->thomas_the_player->updateThomasPosition(MOVE_RIGHT);
-                        printf("pret a bouger lol \n");
-                        //printf("%f\n", this->thomas_the_player->position.x);
-                        break;
-                    case SDLK_SPACE:
-                    case SDLK_z:
-                    case SDLK_UP:
-                        this->thomas_the_player->updateThomasPosition(JUMP);
-                        printf("pret a sauter\n");
-                    default:
-                        break;
-                }
-                break;
-                    
-            default:
-                break;
-        }
-    }
-}
 
 void Game::refresh() {
-
+    //on va pouvoir suppr
+    /*
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     this->thomas_the_player->drawPlayer();
     
-
+    
     //SDL_GL_SwapWindow(window);
+    map->drawMap(); */
+
+    if (startingInterface->isActive()) {
+        startingInterface->handleEvents();
+        //startingInterface->update();
+        startingInterface->render();
+    }
+    if (gamingInterface->isActive()) {
+        gamingInterface->handleEvents();
+        gamingInterface->update();
+        gamingInterface->render();
+    }
+
 
 }
 
@@ -169,3 +138,4 @@ void Game::onWindowResized(unsigned int width, unsigned int height) {
         -GL_VIEW_SIZE / 2. / aspectRatio, GL_VIEW_SIZE / 2. / aspectRatio);
     }
 }
+

@@ -12,9 +12,11 @@ typedef struct AABB {
 AABB createAABB(Position p, float h, float w);
 void drawBox(AABB box);
 
+bool collision(AABB box1, AABB box2);
+
 //AABB Array (voir si dansun fichier à part)
 const int MAX_DECOR_COUNT = 23;
-
+/*
 AABB allDecor[MAX_DECOR_COUNT] = {
     createAABB(Position(-4., 5.), 1., 2.), 
     createAABB(Position(4., 7.), 3., 1.),
@@ -39,7 +41,7 @@ AABB allDecor[MAX_DECOR_COUNT] = {
     createAABB(Position(-4., -7.), 1., 1.),
     createAABB(Position(-4., -8.), 1., 1.),
     createAABB(Position(-4., -10.), 1., 1.) 
-};
+}; */
 
 
 
