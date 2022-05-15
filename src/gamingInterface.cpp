@@ -62,6 +62,11 @@ void GamingInterface::handleEvents() {
                     case SDLK_UP:
                         game->thomas_the_player->updateThomasPosition(JUMP);
                         printf("pret a sauter\n");
+                    case SDLK_RETURN:
+                        //ia enlever
+                        printf("ca veut ending \n");
+                        game->changeInterfaceToEnding();
+                        break;
                     default:
                         break;
                 }

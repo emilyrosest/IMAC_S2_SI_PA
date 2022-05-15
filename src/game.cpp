@@ -5,6 +5,7 @@
 
 #include "startingInterface.hpp"
 #include "gamingInterface.hpp"
+#include "endingInterface.hpp"
 
 
 #include <iostream>
@@ -16,6 +17,7 @@ Map *map = nullptr;
 
 StartingInterface* startingInterface = nullptr;
 GamingInterface* gamingInterface = nullptr;
+EndingInterface* endingInterface = nullptr;
 
 Game::Game() {
 
@@ -69,6 +71,7 @@ Game::Game() {
 
     startingInterface = new StartingInterface(this);
     gamingInterface = new GamingInterface(this);
+    endingInterface = new EndingInterface(this);
 
     onWindowResized(WINDOW_WIDTH, WINDOW_HEIGHT);
     
@@ -101,6 +104,11 @@ void Game::refresh() {
         gamingInterface->handleEvents();
         gamingInterface->update();
         gamingInterface->render();
+    }
+    if (endingInterface->isActive()) {
+        endingInterface->handleEvents();
+        endingInterface->update();
+        endingInterface->render();
     }
 
 

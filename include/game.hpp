@@ -64,9 +64,18 @@ public :
         return false;
     }
 
+    bool ending() {
+        if (activity == 2) {
+            return true;
+        }
+        return false;
+    }
+
     void setActivity (int newActivity) { activity = newActivity; };
 
     void changeInterfaceToGaming() { setActivity(1); };
+
+    void changeInterfaceToEnding() { setActivity(2); };
 
 
 private :
@@ -79,3 +88,7 @@ private :
 
     int activity = 0;
 };
+
+//Starting = 0
+//Gaming = 1
+//Ending = 2
