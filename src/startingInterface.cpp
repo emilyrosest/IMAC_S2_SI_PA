@@ -3,7 +3,7 @@
 #include "../include/square.hpp"
 #include "../include/player.hpp"
 
-Square squaretest = Square(0., 0., 10., 10., Color(0.4, 0.5, 0.2), 1);
+//Square squaretest = Square(0., 0., 10., 10., Color(0.4, 0.5, 0.2), 1);
 
 void StartingInterface::handleEvents() {
     SDL_Event event = game->e;
@@ -91,16 +91,16 @@ void StartingInterface::draw() {
     glBegin(GL_QUADS);
             
         glTexCoord2f(0., 1.);
-        glVertex2f(-1.2, -1.2);
+        glVertex2f(-10., -10.);
 
         glTexCoord2f(1., 1.);
-        glVertex2f(1.2, -1.2);
+        glVertex2f(10., -10.);
 
         glTexCoord2f(1., 0.);
-        glVertex2f(1.2, 1.2);
+        glVertex2f(10., 10.);
 
         glTexCoord2f(0., 0.);
-        glVertex2f(-1.2, 1.2);
+        glVertex2f(-10., 10.);
     glEnd();
 
 
@@ -113,7 +113,8 @@ void StartingInterface::render() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    //squaretest.drawSquare();
+
+    glScalef(0.1, 0.1, 0.);
 
     draw();  
 

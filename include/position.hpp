@@ -3,7 +3,7 @@
 class Position{
 public:
 
-    Position();
+    Position() {};
 
     Position(float x, float y);
 

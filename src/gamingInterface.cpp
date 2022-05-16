@@ -46,24 +46,24 @@ void GamingInterface::handleEvents() {
                 switch (e.key.keysym.sym) { // Quelle touche est appuyée ?
                     case SDLK_q:
                     case SDLK_LEFT:
-                        game->thomas_the_player->updateThomasPosition(MOVE_LEFT);
+                        thomas_the_player->updateThomasPosition(MOVE_LEFT);
                         printf("pret a bouger lol \n");
                         //printf("%f\n", this->thomas_the_player->position.x);
                         break;
 
                     case SDLK_d:
                     case SDLK_RIGHT:
-                        game->thomas_the_player->updateThomasPosition(MOVE_RIGHT);
+                        thomas_the_player->updateThomasPosition(MOVE_RIGHT);
                         printf("pret a bouger lol \n");
                         //printf("%f\n", this->thomas_the_player->position.x);
                         break;
                     case SDLK_SPACE:
                     case SDLK_z:
                     case SDLK_UP:
-                        game->thomas_the_player->updateThomasPosition(JUMP);
+                        thomas_the_player->updateThomasPosition(JUMP);
                         printf("pret a sauter\n");
                     case SDLK_RETURN:
-                        //ia enlever
+                        //a enlever !!!!!
                         printf("ca veut ending \n");
                         game->changeInterfaceToEnding();
                         break;
@@ -79,7 +79,9 @@ void GamingInterface::handleEvents() {
 }
 
 void GamingInterface::update() {
-
+    if (thomas_the_player->win(*thomas_the_winner)) {
+        game->changeInterfaceToEnding();
+    }
 }
 
 void GamingInterface::render() {
@@ -87,7 +89,17 @@ void GamingInterface::render() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    game->thomas_the_player->drawPlayer();
+    //glPushMatrix();
+
+    glScalef(0.1, 0.1, 0.);
+
+    
     
     map->drawMap();
+
+    thomas_the_winner->drawPlayer();
+
+    thomas_the_player->drawPlayer();
+
+    //glPopMatrix();
 }

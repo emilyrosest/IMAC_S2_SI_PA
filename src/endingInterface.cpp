@@ -72,16 +72,16 @@ void EndingInterface::draw() {
     glBegin(GL_QUADS);
             
         glTexCoord2f(0., 1.);
-        glVertex2f(-1.2, -1.2);
+        glVertex2f(-10., -10.);
 
         glTexCoord2f(1., 1.);
-        glVertex2f(1.2, -1.2);
+        glVertex2f(10., -10.);
 
         glTexCoord2f(1., 0.);
-        glVertex2f(1.2, 1.2);
+        glVertex2f(10., 10.);
 
         glTexCoord2f(0., 0.);
-        glVertex2f(-1.2, 1.2);
+        glVertex2f(-10., 10.);
     glEnd();
 
 
@@ -94,6 +94,7 @@ void EndingInterface::render() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+    glScalef(0.1, 0.1, 0.);
 
     draw();  
     

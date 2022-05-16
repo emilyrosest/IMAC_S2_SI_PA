@@ -20,9 +20,13 @@ public :
     float width; 
     int filled;
 
+    float x;
+    float y;
+
     //Square(Position p, float h, float w, Color c, int filled): position (p), height(h), width(w), color(c), filled(filled){};
 
-    Square(float x, float y, float h, float w, Color c, int filled): position(x, y), height(h), width(w), color(c), filled(filled){};
+    //Square(float x, float y, float h, float w, Color c, int filled): position(x, y), height(h), width(w), color(c), filled(filled){};
+    Square(float x, float y, float h, float w, Color c, int filled): x(x), y(y), height(h), width(w), color(c), filled(filled){};
 
     void drawSquare();
 

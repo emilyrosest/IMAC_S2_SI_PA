@@ -23,7 +23,7 @@ Game::Game() {
 
     glScalef(0.1, 0.1, 0.);
 
-    thomas_the_player = new Player(0.0, 0.0, 2., 4., Color());
+    
     QuadTree* quadtree = new QuadTree(Position(-20., 20.), Position(20., -20.));
 
     //this->quadtree->insertAllDecor();
