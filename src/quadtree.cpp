@@ -1,5 +1,6 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <stdio.h>
 
 #include "quadtree.hpp"
 
@@ -109,13 +110,16 @@ void QuadTree::insertBox(AABB* box) {
         insertAtGoodPlace(box);
     } 
 }
-/*
+
 //Peut-être le bouger si besoin
-void QuadTree::insertAllDecor() {
+
+void QuadTree::insertAllDecor(AABB aabb_decor[]) {
     for (int i = 0; i < MAX_DECOR_COUNT; i++) {
-        insertBox(&allDecor[i]);
+        //printf("%d\n", i);
+        insertBox(&(aabb_decor[i]));
     }
-} */
+}
+
 
 QuadTree* QuadTree::search(Position pos) {
     if (isLeaf()) {

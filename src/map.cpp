@@ -13,8 +13,13 @@ void Map::drawMap() {
 
 }
 
-
-
+/*
+void Map::insertAllDecor() {
+    for (int i = 0; i < MAX_DECOR_COUNT; i++) {
+        insertBox(&allDecor[i]);
+    }
+}
+*/
 
 ////////////////////////////////////AFFICHAGE TEXTURE ET FOND////////////////////////////////////////////////
 /*

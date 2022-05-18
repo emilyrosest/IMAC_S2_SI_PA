@@ -6,14 +6,16 @@
 
 
 #include "square.hpp"
+#include "quadtree.hpp"
 
 
 
 class Map {
 public :
+
     Map();
 
-    ~Map() {};
+    //~Map() {};
 
     static const int MAP_WIDTH = 1000;
 
@@ -22,6 +24,10 @@ public :
     void InitMap();
 
     void drawMap();
+
+    //void insertAllDecor();
+
+    //QuadTree *quadtree;
 
     //void cleanMap();
 

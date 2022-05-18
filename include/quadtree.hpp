@@ -1,3 +1,4 @@
+#ifndef QUADTREE_H
 #include "position.hpp"
 
 
@@ -42,11 +43,6 @@ AABB allDecor[MAX_DECOR_COUNT] = {
     createAABB(Position(-4., -8.), 1., 1.),
     createAABB(Position(-4., -10.), 1., 1.) 
 }; */
-
-
-
-
-
 
 
 
@@ -105,7 +101,7 @@ public :
 
     void insertBox(AABB* box);
 
-    void insertAllDecor();
+    void insertAllDecor(AABB aabb_decor[]);
 
     void drawLine();
 
@@ -116,3 +112,5 @@ public :
     QuadTree* search(Position pos);
 
 };
+
+#endif
