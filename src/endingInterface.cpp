@@ -96,6 +96,8 @@ void EndingInterface::render() {
 
     glScalef(0.1, 0.1, 0.);
 
+    glColor3f(1., 1., 1.);
+
     draw();  
     
 }

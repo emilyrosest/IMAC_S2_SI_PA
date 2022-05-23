@@ -94,7 +94,7 @@ void Game::refresh() {
         startingInterface->render();
     }
     if (gamingInterface->isActive()) {
-        
+        gamingInterface->prepare();
         gamingInterface->handleEvents();
         gamingInterface->update();
         gamingInterface->render();

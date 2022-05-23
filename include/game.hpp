@@ -67,7 +67,7 @@ public :
     }
 
     bool ending() {
-        if (activity == 2) {
+        if (activity == 10) {
             return true;
         }
         return false;
@@ -77,7 +77,11 @@ public :
 
     void changeInterfaceToGaming() { setActivity(1); };
 
-    void changeInterfaceToEnding() { setActivity(2); };
+    void levelUp() { level = 2; };
+
+    int getLevel() { return level; };
+
+    void changeInterfaceToEnding() { setActivity(10); };
 
 
 private :
@@ -89,8 +93,10 @@ private :
     SDL_GLContext context;
 
     int activity = 0;
+
+    int level = 1;
 };
 
 //Starting = 0
-//Gaming = 1
-//Ending = 2
+//Gaming = 1 (level 1), 2 (level 2)
+//Ending = 10

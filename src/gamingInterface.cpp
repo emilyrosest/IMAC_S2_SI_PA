@@ -5,7 +5,15 @@
 
 #include "../include/gamingInterface.hpp"
 
+void GamingInterface::prepare() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 
+    glScalef(0.1, 0.1, 0.);
+
+    //this->game->quadtree->insertAllDecor(allDecor);
+}
 
 void GamingInterface::handleEvents() {
     SDL_Event e = game->e;
@@ -38,7 +46,7 @@ void GamingInterface::handleEvents() {
 
             /* Clic souris */
             case SDL_MOUSEBUTTONUP:
-                printf("clic en (%d, %d)\n", e.button.x, e.button.y);
+                //printf("clic en (%d, %d)\n", e.button.x, e.button.y);
                 break;
                 
             /* Touche clavier */
@@ -48,27 +56,28 @@ void GamingInterface::handleEvents() {
                     case SDLK_q:
                     case SDLK_LEFT:
                         thomas_the_player->updateThomasPosition(MOVE_LEFT);
-                        printf("pret a bouger lol \n");
-                        //printf("%f\n", this->thomas_the_player->position.x);
                         break;
 
                     case SDLK_d:
                     case SDLK_RIGHT:
                         thomas_the_player->updateThomasPosition(MOVE_RIGHT);
-                        printf("pret a bouger lol \n");
-                        //printf("%f\n", this->thomas_the_player->position.x);
                         break;
                     case SDLK_SPACE:
                     case SDLK_z:
                     case SDLK_UP:
                         thomas_the_player->updateThomasPosition(JUMP);
-                        printf("pret a sauter\n");
                         break;
                     case SDLK_RETURN:
                         //a enlever !!!!!
                         printf("ca veut ending \n");
                         game->changeInterfaceToEnding();
-                        break;
+                        break; 
+                    case SDLK_i:
+                        if (game->getLevel() == 2) {
+                            changePlayer();
+                            printf(" ca change player ");
+                        }
+                        break; 
                     default:
                         break;
                 }
@@ -81,26 +90,95 @@ void GamingInterface::handleEvents() {
 }
 
 void GamingInterface::update() {
+    
+    camera(thomas_the_player->x, thomas_the_player->y);
+
+    if (game->getLevel() == 1) {
+        if (thomas_the_mover_1->win(*thomas_the_winner_1)) {
+            game->levelUp();
+            thomas_the_mover_1->x = 0.;
+            thomas_the_mover_1->y = 0.;
+            printf("ca level up ");
+        }
+    } 
+    if (game->getLevel() == 2) {
+        if (thomas_the_mover_1->win(*thomas_the_winner_1) && thomas_the_mover_2->win(*thomas_the_winner_2)) { 
+            game->changeInterfaceToEnding();
+        }
+    }
+
+/*
     if (thomas_the_player->win(*thomas_the_winner)) {
         game->changeInterfaceToEnding();
     }
+
+
+    if (thomas_the_mover_1->win(*thomas_the_winner_1)) {
+        game->changeInterfaceToEnding();
+    }
+    */
 }
 
 void GamingInterface::render() {
-
+    /*
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    //glPushMatrix();
-
     glScalef(0.1, 0.1, 0.);
 
-    this->game->quadtree->insertAllDecor(allDecor);
+    camera(thomas_the_player->x, thomas_the_player->y);
+    */
 
-    thomas_the_winner->drawPlayer();
+    if (game->getLevel() == 1) {
+        this->game->quadtree->insertAllDecor(allDecor);
+    }
+    //this->game->quadtree->insertAllDecor(allDecor);
 
-    thomas_the_player->drawPlayer();
 
-    //glPopMatrix();
+    //thomas_the_winner->drawPlayer();
+
+    //thomas_the_player->drawPlayer();
+
+
+
+    thomas_the_winner_1->drawPlayer();
+    
+    thomas_the_mover_1->drawPlayer();
+    
+
+    if (game->getLevel() == 2) {
+        thomas_the_winner_2->drawPlayer();
+        thomas_the_mover_2->drawPlayer();
+    }
+
+}
+
+
+void GamingInterface::camera(float x, float y) {
+    if (thomas_the_player->x > 0) {
+        glTranslatef(-x, 0., 0.);
+    }
+    if (thomas_the_player->x < 0) {
+        glTranslatef(-x, 0., 0.);
+    }
+    if (thomas_the_player->y > 0) {
+        glTranslatef(0., -y, 0.);
+    }
+    if (thomas_the_player->y < 0) {
+        glTranslatef(0., y, 0.);
+    }
+}
+
+void GamingInterface::changePlayer() {
+    if (thomas_the_player == thomas_the_mover_1) {
+        printf(" je suis le 1e ");
+        thomas_the_player = thomas_the_mover_2;
+        return;
+    }
+    if (thomas_the_player == thomas_the_mover_2) {
+        printf(" je suis le 2e ");
+        thomas_the_player = thomas_the_mover_1;
+        return;
+    }
 }

@@ -14,7 +14,7 @@ void Map::drawMap() {
 }
 
 void Map::initDecor(float X[], float Y[], float H[], float W[]){
-string filename("/home/elise/Documents/Square_Dash/data/map.txt");
+string filename("data/map.txt");
 
     string line;
     float x;
