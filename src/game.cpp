@@ -84,19 +84,12 @@ Game::Game() {
 
 void Game::refresh() {
     //on va pouvoir suppr
-    /*
-    glClear(GL_COLOR_BUFFER_BIT);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    this->thomas_the_player->drawPlayer();
-    
-    
+    /* 
     //SDL_GL_SwapWindow(window);
     map->drawMap(); */
 
     if (startingInterface->isActive()) {
         startingInterface->handleEvents();
-        
         //startingInterface->update();
         startingInterface->render();
     }

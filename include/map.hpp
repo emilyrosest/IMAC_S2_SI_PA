@@ -36,8 +36,6 @@ public :
 
     void drawMap();
 
-    //void insertAllDecor();
-
     //QuadTree *quadtree;
 
     //void cleanMap();

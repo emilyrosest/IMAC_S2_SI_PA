@@ -24,7 +24,7 @@ public :
         }
 
         thomas_the_player = new Player(0., 0., 2., 4., Color(0.3, 0.4, 0.5), 1);
-        thomas_the_winner = new Player(5., 0., thomas_the_player->height, thomas_the_player->width, Color(1., 0., 0.), 0);
+        thomas_the_winner = new Player(-20., 24., thomas_the_player->height, thomas_the_player->width, Color(1., 0., 0.), 0);
     }
 
     ~GamingInterface() {}

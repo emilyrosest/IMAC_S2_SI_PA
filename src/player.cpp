@@ -53,7 +53,7 @@ void Player::jump() {
     //for (int i = 0; i < 2; i++) {
         //Y -= float(i)/100. * SDL_GetTicks();
     //}
-    this->y += 0.5;
+    this->y += 2;
     //pas fini
 }
 

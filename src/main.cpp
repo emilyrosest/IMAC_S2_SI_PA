@@ -33,12 +33,7 @@ int main(int argc, char** argv)
         //game->handleEvents();
         game->refresh();
         
-
-        //marche pas, erreur de segmentation lorsque affichage de texture
-        //map->InitMap(); 
-        //map->drawMap();
-
-    
+        
         /* Calcul du temps ecoule */
         Uint32 elapsedTime = SDL_GetTicks() - startTime;
         /* Si trop peu de temps s'est ecoule, on met en pause le programme */

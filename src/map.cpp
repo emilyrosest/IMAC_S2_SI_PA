@@ -72,13 +72,6 @@ string filename("/home/elise/Documents/Square_Dash/data/map.txt");
     //return EXIT_SUCCESS;
 }
 
-/*
-void Map::insertAllDecor() {
-    for (int i = 0; i < MAX_DECOR_COUNT; i++) {
-        insertBox(&allDecor[i]);
-    }
-}
-*/
 
 ////////////////////////////////////AFFICHAGE TEXTURE ET FOND////////////////////////////////////////////////
 /*

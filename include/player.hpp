@@ -15,7 +15,6 @@ public:
 
     //Player(){};
 
-    
     //Player(float x, float y, float h, float w, Color color);
     Player(float x, float y, float h, float w, Color color, int filled);
 
