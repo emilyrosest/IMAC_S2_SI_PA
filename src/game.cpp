@@ -25,42 +25,10 @@ EndingInterface* endingInterface = nullptr;
 Game::Game() {
 
     glScalef(0.1, 0.1, 0.);
-
-    
+   
     this->quadtree = new QuadTree(Position(-20., 20.), Position(20., -20.)); //faire un constructeur qui prend en pram ces valeurs
-
-    AABB allDecor[MAX_DECOR_COUNT] = {
-    createAABB(Position(-4., 5.), 1., 2.), 
-    createAABB(Position(4., 7.), 3., 1.),
-    createAABB(Position(-6., -3.), 2., 3.),
-    createAABB(Position(-1., -7.), 4., 1.),
-    createAABB(Position(8., 2.), 1., 2.),
-    createAABB(Position(-8., 6.), 3., 3.),
-    createAABB(Position(-8., -2.), 3., 2.),
-    createAABB(Position(-6., 7.), 2., 2.),
-    createAABB(Position(-7., 2.), 3., 1.),
-    createAABB(Position(8., -2.), 1., 2.),
-    createAABB(Position(-11., 9.), 3., 2.),
-    createAABB(Position(-13., 13.), 2., 1.),
-    createAABB(Position(-9., 9.), 2., 2.),
-    createAABB(Position(-10., 10.), 1., 1.),
-    createAABB(Position(-3., 4.), 2., 2.),
-    createAABB(Position(-5., -6.), 1., 1.),
-    createAABB(Position(-7., -5.), 2., 2.),
-    createAABB(Position(-4., -9.), 1., 1.),
-    createAABB(Position(-2., -4.), 1., 1.),
-    createAABB(Position(-2., -6.), 1., 1.),
-    createAABB(Position(-4., -7.), 1., 1.),
-    createAABB(Position(-4., -8.), 1., 1.),
-    createAABB(Position(-4., -10.), 1., 1.) 
-    };
-
-    this->quadtree->insertAllDecor(allDecor);
-    //quadtree->insertAllDecor();
-    //marche pas
     
-    AABB boxx = createAABB(Position(0.3, 0.3), 3., 1.);
-    quadtree->insertBox(&boxx);
+
 
     /* Initialisation de la SDL */
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -128,10 +96,12 @@ void Game::refresh() {
 
     if (startingInterface->isActive()) {
         startingInterface->handleEvents();
+        
         //startingInterface->update();
         startingInterface->render();
     }
     if (gamingInterface->isActive()) {
+        
         gamingInterface->handleEvents();
         gamingInterface->update();
         gamingInterface->render();

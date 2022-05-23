@@ -7,7 +7,7 @@
 
 //#include "square.hpp"
 #include "player.hpp"
-//#include "quadtree.hpp"
+#include "quadtree.hpp"
 #include "map.hpp"
 
 static const char WINDOW_TITLE[] = "Square Dash";
@@ -50,7 +50,7 @@ public :
 
     QuadTree *quadtree;
 
-    //Map *map;
+    Map *map;
 
     bool starting() {
         if (activity == 0) {

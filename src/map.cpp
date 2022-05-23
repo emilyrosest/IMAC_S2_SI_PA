@@ -13,6 +13,65 @@ void Map::drawMap() {
 
 }
 
+void Map::initDecor(float X[], float Y[], float H[], float W[]){
+string filename("/home/elise/Documents/Square_Dash/data/map.txt");
+
+    string line;
+    float x;
+    float y;
+    float h;
+    float w;
+   
+
+    ifstream input_file(filename);
+    if (!input_file.is_open()) {
+        cerr << "Could not open the file - '" << filename << "'" << endl;
+        //return EXIT_FAILURE;
+    }
+    
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    int l  = 0;
+
+
+    while (getline(input_file, line)){
+
+        istringstream iss(line);
+        string token;
+        int lineIndex = 0;
+        
+
+        while (iss >> token) {
+            if (lineIndex == 0){    
+                x = stof(token);
+                (X[i]) = x;
+                i+= 1;
+            }    
+            else if (lineIndex == 1){    
+                y = stof(token);
+                (Y[j]) = y;
+                j+= 1;
+                
+            }
+            else if (lineIndex == 2){    
+                h = stof(token);
+                (H[k]) = h;
+                k+= 1;
+            }
+            else if (lineIndex == 3){   
+                w = stof(token);
+                (W[l]) = w;
+                l+= 1;
+            }
+            lineIndex++;
+        }
+    }
+
+    input_file.close();
+    //return EXIT_SUCCESS;
+}
+
 /*
 void Map::insertAllDecor() {
     for (int i = 0; i < MAX_DECOR_COUNT; i++) {

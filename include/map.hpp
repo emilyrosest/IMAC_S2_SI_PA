@@ -6,13 +6,21 @@
 
 
 #include "square.hpp"
-#include "quadtree.hpp"
+//#include "quadtree.hpp"
+
+
+#include <iostream>
+#include <cstring>
+#include <fstream>
+#include <sstream>
+
+
+using namespace std;
 
 
 
 class Map {
 public :
-
     Map();
 
     //~Map() {};
@@ -20,6 +28,9 @@ public :
     static const int MAP_WIDTH = 1000;
 
     static const int MAP_HEIGHT = 1000;
+    
+
+    void initDecor(float X[], float Y[], float H[], float W[]);
 
     void InitMap();
 

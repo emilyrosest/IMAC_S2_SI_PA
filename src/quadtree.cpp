@@ -1,6 +1,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <stdio.h>
+#include <iostream>
 
 #include "quadtree.hpp"
 
@@ -14,17 +15,22 @@ AABB createAABB(Position p, float h, float w) {
 }
 
 void drawBox(AABB box) {
+    
     float x = box.position.x;
     float y = box.position.y;
     float h = box.height;
     float w = box.weight;
+    
 
+    glColor3f(1, 0.5, 0.7);
     glBegin(GL_QUADS);
     glVertex2f( x , y);
     glVertex2f( x + w , y);
     glVertex2f( x + w , y + h);
     glVertex2f( x , y + h);
     glEnd();
+
+    //printf("%f\n", box.height);
 }
 
 bool collision(AABB box1, AABB box2) {
@@ -85,7 +91,6 @@ void QuadTree::insertAtGoodPlace(AABB* box) {
 }
 
 void QuadTree::insertBox(AABB* box) {
-
     if (isLeaf() && boxCount < 4) {
         boxes[boxCount] = box;
         boxCount++;
