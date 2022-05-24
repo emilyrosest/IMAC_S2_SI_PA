@@ -5,7 +5,7 @@
 typedef struct AABB {
     Position position;
     float height;
-    float weight;
+    float weight; //WIDTHHHHHHHH
 } AABB;
 
 
@@ -34,6 +34,8 @@ public :
     QuadTree* topRightTree;
     QuadTree* bottomLeftTree;
     QuadTree* bottomRightTree;
+
+    AABB* boxesToTest[4];
 
     QuadTree(Position topL, Position botR) {
             
@@ -82,6 +84,7 @@ public :
     AABB getAABB(int i) { return *boxes[i]; };
 
     QuadTree* search(Position pos);
+
 
 };
 

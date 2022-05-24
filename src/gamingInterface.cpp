@@ -133,14 +133,6 @@ void GamingInterface::render() {
     if (game->getLevel() == 1) {
         this->game->quadtree->insertAllDecor(allDecor);
     }
-    //this->game->quadtree->insertAllDecor(allDecor);
-
-
-    //thomas_the_winner->drawPlayer();
-
-    //thomas_the_player->drawPlayer();
-
-
 
     thomas_the_winner_1->drawPlayer();
     
@@ -150,6 +142,15 @@ void GamingInterface::render() {
     if (game->getLevel() == 2) {
         thomas_the_winner_2->drawPlayer();
         thomas_the_mover_2->drawPlayer();
+    }
+
+    //printf("quadtree %d ", (int)this->game->quadtree->search((Position(thomas_the_player->x, thomas_the_player->y)))->boxes[0]->position.x);
+        
+    if (!collision()) {
+        printf("pas de collision");
+    }
+    if (collision()) {
+        //printf(" collision ");
     }
 
 }
@@ -181,4 +182,36 @@ void GamingInterface::changePlayer() {
         thomas_the_player = thomas_the_mover_1;
         return;
     }
+}
+
+bool GamingInterface::collision() {
+    QuadTree* quadTreeToTest = this->game->quadtree->search(Position(thomas_the_player->x, thomas_the_player->y));
+    for (int i = 0; i < quadTreeToTest->getBoxCount(); i++) {
+        if (( thomas_the_player->x >= quadTreeToTest->getAABB(i).position.x + quadTreeToTest->getAABB(i).weight )      // trop à droite
+        || (thomas_the_player->x + thomas_the_player->width <= quadTreeToTest->getAABB(i).position.x)) {// trop à gauche 
+        return false;
+        }
+    } 
+    return true; 
+    /*
+    for (int i = 0; i < quadTreeToTest->getBoxCount(); i++) {
+        if (( thomas_the_player->x >= quadTreeToTest->getAABB(i).position.x + quadTreeToTest->getAABB(i).weight )      // trop à droite
+        || (thomas_the_player->x + thomas_the_player->width <= quadTreeToTest->getAABB(i).position.x) // trop à gauche
+        || (thomas_the_player->y >= quadTreeToTest->getAABB(i).position.y + quadTreeToTest->getAABB(i).height) // trop en bas
+        || (thomas_the_player->y + thomas_the_player->height <= quadTreeToTest->getAABB(i).position.y)) {
+        }
+        return false;
+    } 
+    return true; 
+    */
+    /*
+    this->game->quadtree->search((Position(thomas_the_player->x, thomas_the_player->y)))
+    if((box2.position.x >= box1.position.x + box1.weight)      // trop à droite
+     (box2.position.x + box2.weight <= box1.position.x) // trop à gauche
+     (box2.position.y >= box1.position.y + box1.height) // trop en bas
+    || (box2.position.y + box2.height <= box1.position.y))  // trop en haut
+          return false; 
+   else
+          return true; 
+          */
 }

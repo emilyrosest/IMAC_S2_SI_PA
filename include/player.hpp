@@ -26,6 +26,9 @@ public:
 
     bool win(Player winner);
 
+    bool free = true; //true si pas de collision, false sinon
+
+    //bool checkCollision(float x, float y);
 
     Position position;
 

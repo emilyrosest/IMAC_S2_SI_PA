@@ -13,7 +13,7 @@ void StartingInterface::handleEvents() {
 			game->setRunning(0);
 			break;
 		}
-		
+		 
 		if(	event.type == SDL_KEYDOWN && (event.key.keysym.sym == SDLK_ESCAPE)) {
 			game->setRunning(0);
 			break;

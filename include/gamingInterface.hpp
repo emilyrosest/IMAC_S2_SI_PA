@@ -54,6 +54,8 @@ public :
 
     void changePlayer();
 
+    bool collision();
+
     float X[MAX_DECOR_COUNT];
     float Y[MAX_DECOR_COUNT];
     float H[MAX_DECOR_COUNT];
