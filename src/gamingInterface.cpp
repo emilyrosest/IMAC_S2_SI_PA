@@ -11,8 +11,7 @@ void GamingInterface::prepare() {
     glLoadIdentity();
 
     glScalef(0.1, 0.1, 0.);
-
-    //this->game->quadtree->insertAllDecor(allDecor);
+    
 }
 
 void GamingInterface::handleEvents() {
@@ -56,11 +55,20 @@ void GamingInterface::handleEvents() {
                     case SDLK_q:
                     case SDLK_LEFT:
                         thomas_the_player->updateThomasPosition(MOVE_LEFT);
+                        //collision3(MOVE_LEFT);
                         break;
 
                     case SDLK_d:
                     case SDLK_RIGHT:
                         thomas_the_player->updateThomasPosition(MOVE_RIGHT);
+                        //collision3(MOVE_RIGHT);
+                        /*
+                        for (int i = 0; i < this->game->quadtree->search2(thomas_the_player->x, thomas_the_player->y)->getBoxCount(); i++) {
+                            if (collision2(this->game->quadtree->searchAABB(thomas_the_player->x, thomas_the_player->y)[i])) {
+                                thomas_the_player->updateThomasPosition(MOVE_LEFT);
+                                printf( "retour gauche ");
+                            }
+                        }*/
                         break;
                     case SDLK_SPACE:
                     case SDLK_z:
@@ -107,6 +115,19 @@ void GamingInterface::update() {
         }
     }
 
+    
+    //collision3(MOVE_RIGHT);
+
+/*
+    for (int i = 0; i < this->game->quadtree->search2(thomas_the_player->x, thomas_the_player->y)->getBoxCount(); i++) {
+        if (collisionRight(this->game->quadtree->searchAABB(thomas_the_player->x, thomas_the_player->y)[i])) {
+            thomas_the_player->updateThomasPosition(MOVE_LEFT);
+            printf("collision droite ");
+        } else { printf(" pas collision "); }
+    }
+  */
+    //printf(" %d ", this->game->quadtree->search(Position(thomas_the_player->x, thomas_the_player->y))->getBoxCount());
+
 /*
     if (thomas_the_player->win(*thomas_the_winner)) {
         game->changeInterfaceToEnding();
@@ -116,6 +137,14 @@ void GamingInterface::update() {
     if (thomas_the_mover_1->win(*thomas_the_winner_1)) {
         game->changeInterfaceToEnding();
     }
+    */
+/*
+   for (int i = 0; i < this->game->quadtree->search2(thomas_the_player->x, thomas_the_player->y)->getBoxCount(); i++) {
+        if (collision2(this->game->quadtree->searchAABB(thomas_the_player->x, thomas_the_player->y)[i])) {
+            //thomas_the_player->updateThomasPosition(MOVE_LEFT);
+            printf("collision ");
+        } else { printf(" pas collision, "); }
+    } 
     */
 }
 
@@ -132,7 +161,7 @@ void GamingInterface::render() {
 
     if (game->getLevel() == 1) {
         this->game->quadtree->insertAllDecor(allDecor);
-    }
+    } 
 
     thomas_the_winner_1->drawPlayer();
     
@@ -145,13 +174,19 @@ void GamingInterface::render() {
     }
 
     //printf("quadtree %d ", (int)this->game->quadtree->search((Position(thomas_the_player->x, thomas_the_player->y)))->boxes[0]->position.x);
-        
+    /*    
     if (!collision()) {
         printf("pas de collision");
     }
     if (collision()) {
         //printf(" collision ");
     }
+*/
+    //tests
+    //printf(" %f ", this->game->quadtree->search(Position(thomas_the_player->x, thomas_the_player->y))->getTopLeft().x);
+    //printf( " %f, %f ", thomas_the_player->x, thomas_the_player->y);
+
+    //testQuadTree();
 
 }
 
@@ -184,6 +219,53 @@ void GamingInterface::changePlayer() {
     }
 }
 
+
+
+//---------------------------------
+//tests de collision
+
+
+
+
+
+
+bool GamingInterface::collisionTop(AABB* box) {
+    if (thomas_the_player->y + thomas_the_player->height > box->y) {
+        return false;
+    }
+    return true;
+}
+bool GamingInterface::collisionBottom(AABB* box) {
+    if (thomas_the_player->y > box->y + box->height) {
+        return false;
+    }
+    return true;
+}
+bool GamingInterface::collisionRight(AABB* box) {
+    
+    if (thomas_the_player->x + thomas_the_player->width < box->x && thomas_the_player->y > box->y + box->height) {
+        return false; 
+    }
+    return true;
+    /*
+   if (thomas_the_player->x + thomas_the_player->width > box->x && thomas_the_player->x + thomas_the_player->width < box->x + box->weight) {
+       return true;
+   }
+   return false;
+   */
+}
+bool GamingInterface::collisionLeft(AABB* box) {
+    if (thomas_the_player->x > box->x + box->weight) {
+        return false; 
+    }
+    return true;
+}
+
+bool GamingInterface::collision2(AABB* box) {
+    return !(thomas_the_player->x > box->x + box->weight || thomas_the_player->x + thomas_the_player->width < box->x || thomas_the_player->y + thomas_the_player->height > box->y || thomas_the_player->y > box->y + box->height);
+}
+
+
 bool GamingInterface::collision() {
     QuadTree* quadTreeToTest = this->game->quadtree->search(Position(thomas_the_player->x, thomas_the_player->y));
     for (int i = 0; i < quadTreeToTest->getBoxCount(); i++) {
@@ -214,4 +296,48 @@ bool GamingInterface::collision() {
    else
           return true; 
           */
+}
+
+
+void GamingInterface::collision3(int direction) {
+    //printf(" ca rentre en fonction ");
+    switch(direction) {
+        case MOVE_LEFT :
+            for (int i = 0; i < this->game->quadtree->search2(thomas_the_player->x, thomas_the_player->y)->getBoxCount(); i++) {
+                printf(" ca rentre en for ");
+                if (collision2(this->game->quadtree->searchAABB(thomas_the_player->x, thomas_the_player->y)[i])) {
+                    thomas_the_player->updateThomasPosition(MOVE_RIGHT);
+                    printf(" retour a gauche ");
+                }
+            }
+            break;
+        case MOVE_RIGHT :
+            printf(" cas right ");
+            printf(" %d ", this->game->quadtree->search2(thomas_the_player->x, thomas_the_player->y)->getBoxCount());
+            for (int i = 0; i < this->game->quadtree->search2(thomas_the_player->x, thomas_the_player->y)->getBoxCount(); i++) {
+                printf(" ca rentre en for ");
+                if (collision2(this->game->quadtree->searchAABB(thomas_the_player->x, thomas_the_player->y)[i])) {
+                    thomas_the_player->updateThomasPosition(MOVE_LEFT);
+                }
+            }
+            break;
+        case JUMP :
+            break;
+        default :
+            break;
+    }
+}
+
+void GamingInterface::testQuadTree() {
+    QuadTree* nodeToTest = this->game->quadtree->search2(thomas_the_player->x, thomas_the_player->y);
+
+    printf("boxCount = %d ", nodeToTest->getBoxCount());
+
+    for (int i = 0; i < nodeToTest->getBoxCount(); i++) {
+        printf(" %d, %d ", (int)nodeToTest->boxes[i]->x, (int)nodeToTest->boxes[i]->y);
+    }
+}
+
+void GamingInterface::testSansQuadTree() {
+    
 }

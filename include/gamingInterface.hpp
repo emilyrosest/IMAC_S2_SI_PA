@@ -19,7 +19,8 @@ public :
         GamingInterface::map = new Map();
         game->map->initDecor(X, Y, H, W);
         for (int i = 0; i < MAX_DECOR_COUNT; i++){
-            allDecor[i] = createAABB(Position(X[i], Y[i]), H[i], W[i]);
+            //allDecor[i] = createAABB(Position(X[i], Y[i]), H[i], W[i]);
+            allDecor[i] = createAABB(X[i], Y[i], H[i], W[i]);
 
         }
         //bonnes coordonnées pour level 1:
@@ -54,7 +55,24 @@ public :
 
     void changePlayer();
 
+
+
+    //tests de collision
     bool collision();
+
+    bool collision2(AABB* box);
+
+    void collision3(int direction);
+
+    bool collisionTop(AABB* box);
+    bool collisionBottom(AABB* box);
+    bool collisionLeft(AABB* box);
+    bool collisionRight(AABB* box);
+    
+    void testQuadTree();
+    void testSansQuadTree();
+
+    //-----------------------
 
     float X[MAX_DECOR_COUNT];
     float Y[MAX_DECOR_COUNT];

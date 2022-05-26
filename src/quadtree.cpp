@@ -6,9 +6,10 @@
 #include "quadtree.hpp"
 
 
-AABB createAABB(Position p, float h, float w) {
+AABB createAABB(float x, float y, float h, float w) {
     AABB box;
-    box.position = p;
+    box.x = x;
+    box.y = y;
     box.height = h;
     box.weight = w;
     return box;
@@ -16,8 +17,8 @@ AABB createAABB(Position p, float h, float w) {
 
 void drawBox(AABB box) {
     
-    float x = box.position.x;
-    float y = box.position.y;
+    float x = box.x;
+    float y = box.y;
     float h = box.height;
     float w = box.weight;
     
@@ -32,7 +33,7 @@ void drawBox(AABB box) {
 
     //printf("%f\n", box.height);
 }
-
+/*
 bool collision(AABB box1, AABB box2) {
     if((box2.position.x >= box1.position.x + box1.weight)      // trop à droite
     || (box2.position.x + box2.weight <= box1.position.x) // trop à gauche
@@ -41,7 +42,7 @@ bool collision(AABB box1, AABB box2) {
           return false; 
    else
           return true; 
-}
+} */
 
 void QuadTree::initNodes() {
     if (topLeftTree == nullptr) {
@@ -75,14 +76,14 @@ void QuadTree::drawLine() {
 }
 
 void QuadTree::insertAtGoodPlace(AABB* box) {
-    if ((topLeft.x + bottomRight.x) / 2 >= box->position.x) {
-        if ((topLeft.y + bottomRight.y) / 2 <= box->position.y) { 
+    if ((topLeft.x + bottomRight.x) / 2 >= box->x) {
+        if ((topLeft.y + bottomRight.y) / 2 <= box->y) { 
             topLeftTree->insertBox(box);
         } else {
             bottomLeftTree->insertBox(box);
         }
     } else {
-        if ((topLeft.y + bottomRight.y) / 2 <= box->position.y) {
+        if ((topLeft.y + bottomRight.y) / 2 <= box->y) {
             topRightTree->insertBox(box);
         } else {
             bottomRightTree->insertBox(box);
@@ -150,4 +151,51 @@ QuadTree* QuadTree::search(Position pos) {
     return nullptr;
 }
 
-AABB** 
+QuadTree* QuadTree::search2(float x, float y) {
+    if (isLeaf()) {
+        return this;
+    }
+    if (!isLeaf()) {
+        if ((topLeft.x + bottomRight.x) / 2 >= x) { 
+            if ((topLeft.y + bottomRight.y) / 2 <= y) { 
+
+                return topLeftTree->search2(x, y);
+            } else {
+                return bottomLeftTree->search2(x, y);
+            }
+        } else {
+            if ((topLeft.y + bottomRight.y) / 2 <= y) {
+
+                return topRightTree->search2(x, y);
+            } else {
+                return bottomRightTree->search2(x, y);
+            }
+        } 
+    } 
+    return nullptr;
+}
+
+AABB** QuadTree::searchAABB(float x, float y) {
+        if (isLeaf()) {
+        return this->boxes;
+    }
+    if (!isLeaf()) {
+        if ((topLeft.x + bottomRight.x) / 2 >= x) { 
+            if ((topLeft.y + bottomRight.y) / 2 <= y) { 
+
+                return topLeftTree->searchAABB(x, y);
+            } else {
+                return bottomLeftTree->searchAABB(x, y);
+            }
+        } else {
+            if ((topLeft.y + bottomRight.y) / 2 <= y) {
+
+                return topRightTree->searchAABB(x, y);
+            } else {
+                return bottomRightTree->searchAABB(x, y);
+            }
+        } 
+    } 
+    return nullptr;
+}
+

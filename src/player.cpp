@@ -2,6 +2,8 @@
 #include <GL/glu.h>
 #include "../include/player.hpp"
 
+
+
 #include <iostream>
 
 
@@ -32,22 +34,30 @@ void Player::updateThomasPosition(int direction) {
     d = 1; // a changer
     switch (direction) {
         case MOVE_LEFT :
+            /*
             if(this->free == true){
                 this->x -= d;
             }
             else{
                 printf("collision à gauche");
             }
+            */
+            this->x -= d;
+            
             break;
         case MOVE_RIGHT :
+            /*
               if(this->free == true){
                 this->x += d;
             }
             else{
                 printf("collision à droite");
             }
+            */
+            this->x += d;
             break;
         case JUMP :
+            /*
             if(this->free == true){
                 printf("pret a sauter \n");
                 jump();
@@ -55,7 +65,9 @@ void Player::updateThomasPosition(int direction) {
             else{
                 printf("ouch la tete");
             }
-            
+            */
+            jump();
+            break;
         default:
             break;
     }
@@ -76,6 +88,41 @@ void Player::jump() {
 bool Player::win(Player winner) {
     return (this->x == winner.x && this->y == winner.y);
 }
+
+
+
+
+
+
+
+
+/*
+bool Player::collisionTop(AABB* box) {
+    if (thomas_the_player->y + thomas_the_player->height > box->y) {
+        return false;
+    }
+    return true;
+}
+bool Player::collisionBottom(AABB* box) {
+    if (thomas_the_player->y > box->y + box->height) {
+        return false;
+    }
+    return true;
+}
+bool Player::collisionLeft(AABB* box) {
+    if (thomas_the_player->x + thomas_the_player->width < box->x) {
+        return false; 
+    }
+    return true;
+}
+bool Player::collisionRight(AABB* box) {
+    if (thomas_the_player->x > box->x + box->weight) {
+        return false; 
+    }
+    return true;
+}
+
+*/
 
 
 

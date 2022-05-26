@@ -3,6 +3,8 @@
 
 
 typedef struct AABB {
+    float x;
+    float y;
     Position position;
     float height;
     float weight; //WIDTHHHHHHHH
@@ -10,7 +12,7 @@ typedef struct AABB {
 
 
 
-AABB createAABB(Position p, float h, float w);
+AABB createAABB(float x, float y, float h, float w);
 void drawBox(AABB box);
 
 bool collision(AABB box1, AABB box2);
@@ -84,6 +86,10 @@ public :
     AABB getAABB(int i) { return *boxes[i]; };
 
     QuadTree* search(Position pos);
+
+    QuadTree* search2(float x, float y);
+
+    AABB** searchAABB(float x, float y);
 
 
 };

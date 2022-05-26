@@ -30,6 +30,13 @@ public:
 
     //bool checkCollision(float x, float y);
 
+    /*
+    bool collisionTop(AABB* box);
+    bool collisionBottom(AABB* box);
+    bool collisionLeft(AABB* box);
+    bool collisionRight(AABB* box);
+    */
+
     Position position;
 
 private:
