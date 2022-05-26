@@ -93,6 +93,10 @@ public :
 
     AABB** searchAABB(float x, float y);
 
+    void colli(float x, float y, float h, float w);
+
+    bool colliBool(float x, float y, float h, float w);
+
 
 };
 

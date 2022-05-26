@@ -178,6 +178,10 @@ void GamingInterface::render() {
         this->game->quadtree->insertAllDecor(allDecor2);
     }
 
+    //this->game->quadtree->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width);
+    //this->game->quadtree->colliBool(35., 6., 3., 2.);
+
+
     //printf("quadtree %d ", (int)this->game->quadtree->search((Position(thomas_the_player->x, thomas_the_player->y)))->boxes[0]->position.x);
     /*    
     if (!collision()) {
