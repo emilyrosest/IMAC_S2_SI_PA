@@ -4,14 +4,17 @@
 #include <iostream>
 
 #include "quadtree.hpp"
+#include "colors.hpp"
 
-
-AABB createAABB(float x, float y, float h, float w) {
+AABB createAABB(float x, float y, float h, float w, Color c) {
     AABB box;
     box.x = x;
     box.y = y;
     box.height = h;
-    box.weight = w;
+    box.width = w;
+    c.initRandomColor(c);
+    printf("%f", c.b);
+    box.color = c;
     return box;
 }
 
@@ -20,10 +23,15 @@ void drawBox(AABB box) {
     float x = box.x;
     float y = box.y;
     float h = box.height;
-    float w = box.weight;
+    float w = box.width;
+    Color c = box.color;
     
-
-    glColor3f(1, 0.5, 0.7);
+    //choisir cette couleur de façon random
+    /*
+    Color colorsbox;
+    colorsbox.chooseRandomColor();
+    */
+    glColor3f(c.r, c.g, c.b);
     glBegin(GL_QUADS);
     glVertex2f( x , y);
     glVertex2f( x + w , y);

@@ -1,5 +1,6 @@
 #ifndef QUADTREE_H
 #include "position.hpp"
+#include "colors.hpp"
 
 
 typedef struct AABB {
@@ -7,17 +8,18 @@ typedef struct AABB {
     float y;
     Position position;
     float height;
-    float weight; //WIDTHHHHHHHH
+    float width; //WIDTHHHHHHHH
+    Color color;
 } AABB;
 
 
 
-AABB createAABB(float x, float y, float h, float w);
+AABB createAABB(float x, float y, float h, float w, Color c);
 void drawBox(AABB box);
 
 bool collision(AABB box1, AABB box2);
 
-const int MAX_DECOR_COUNT = 20;
+const int MAX_DECOR_COUNT = 32;
 
 
 class QuadTree {

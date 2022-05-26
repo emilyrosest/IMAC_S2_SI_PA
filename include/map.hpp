@@ -29,8 +29,9 @@ public :
 
     static const int MAP_HEIGHT = 1000;
     
+    void initLevel1(float X1[], float Y1[], float H1[], float W1[]);
 
-    void initDecor(float X[], float Y[], float H[], float W[]);
+    void initLevel2(float X2[], float Y2[], float H2[], float W2[]);
 
     void InitMap();
 

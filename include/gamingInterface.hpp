@@ -17,11 +17,11 @@ public :
     GamingInterface(Game* game) {
         GamingInterface::game = game;
         GamingInterface::map = new Map();
-        game->map->initDecor(X, Y, H, W);
+        game->map->initLevel1(X1, Y1, H1, W1);
+        //game->map->initLevel2(X2, Y2, H2, W2);
         for (int i = 0; i < MAX_DECOR_COUNT; i++){
             //allDecor[i] = createAABB(Position(X[i], Y[i]), H[i], W[i]);
-            allDecor[i] = createAABB(X[i], Y[i], H[i], W[i]);
-
+            allDecor1[i] = createAABB(X1[i], Y1[i], H1[i], W1[i], colorbox);
         }
         //bonnes coordonnées pour level 1:
         //thomas_the_player = new Player(0., 0., 2., 4., Color(0.3, 0.4, 0.5), 1);
@@ -74,10 +74,17 @@ public :
 
     //-----------------------
 
-    float X[MAX_DECOR_COUNT];
-    float Y[MAX_DECOR_COUNT];
-    float H[MAX_DECOR_COUNT];
-    float W[MAX_DECOR_COUNT];
+    float X1[MAX_DECOR_COUNT];
+    float Y1[MAX_DECOR_COUNT];
+    float H1[MAX_DECOR_COUNT];
+    float W1[MAX_DECOR_COUNT];
+
+    Color colorbox;
+
+    float X2[MAX_DECOR_COUNT];
+    float Y2[MAX_DECOR_COUNT];
+    float H2[MAX_DECOR_COUNT];
+    float W2[MAX_DECOR_COUNT];
 
     bool isActive() {
         if (game->gaming()) {
@@ -107,7 +114,9 @@ public :
 
 
 private :
-    AABB allDecor[MAX_DECOR_COUNT];
+
+    AABB allDecor1[MAX_DECOR_COUNT];
+    AABB allDecor2[MAX_DECOR_COUNT];
 
     Map* map;
 };
