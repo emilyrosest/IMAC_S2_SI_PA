@@ -13,7 +13,7 @@ AABB createAABB(float x, float y, float h, float w, Color c) {
     box.height = h;
     box.width = w;
     c.initRandomColor(c);
-    printf("%f", c.b);
+    //printf("%f", c.b);
     box.color = c;
     return box;
 }

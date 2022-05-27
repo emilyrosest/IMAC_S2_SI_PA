@@ -121,6 +121,12 @@ void GamingInterface::update() {
         }
     } 
     if (game->getLevel() == 2) {
+        /*
+        if (thomas_the_mover_1->win(*thomas_the_winner_1)) {
+            //thomas_the_mover_1 = new Player(thomas_the_winner_1->x, thomas_the_winner_1->y, thomas_the_mover_1->height, thomas_the_player->width, Color(1., 1., 1.), 1);
+            drawBox(createAABB(thomas_the_winner_1->x, thomas_the_winner_1->y, thomas_the_winner_1->height, thomas_the_winner_1->width, Color(1., 1., 1.)));
+            thomas_the_player = thomas_the_mover_2;
+        } */
         if (thomas_the_mover_1->win(*thomas_the_winner_1) && thomas_the_mover_2->win(*thomas_the_winner_2)) { 
             game->changeInterfaceToEnding();
         }
@@ -145,6 +151,12 @@ void GamingInterface::render() {
         for (int i = 0; i < MAX_DECOR_COUNT; i++) {
             drawBox((allDecor2[i]));
         }
+
+        if (thomas_the_mover_1->win(*thomas_the_winner_1)) {
+            drawBox(createAABB(thomas_the_winner_1->x, thomas_the_winner_1->y, thomas_the_winner_1->height, thomas_the_winner_1->width, Color(1., 1., 1.)));
+            thomas_the_player = thomas_the_mover_2;
+        }
+
     }
 }
 
