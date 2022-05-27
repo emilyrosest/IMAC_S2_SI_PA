@@ -26,7 +26,8 @@ Game::Game() {
 
     glScalef(0.1, 0.1, 0.);
    
-    this->quadtree = new QuadTree(Position(-60., 60.), Position(60., -60.)); //faire un constructeur qui prend en pram ces valeurs
+    this->quadtree_1 = new QuadTree(Position(-60., 60.), Position(60., -60.)); //faire un constructeur qui prend en pram ces valeurs
+    this->quadtree_2 = new QuadTree(Position(-60., 60.), Position(60., -60.));
     
 
 

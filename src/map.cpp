@@ -14,7 +14,8 @@ void Map::drawMap() {
 }
 
 void Map::initLevel1(float X1[], float Y1[], float H1[], float W1[]){
-string filename("data/level1.txt");
+//string filename("data/level1.txt");
+string filename("data/newlevel1.txt");
 
     string line;
     float x;
@@ -73,7 +74,8 @@ string filename("data/level1.txt");
 }
 
 void Map::initLevel2(float X2[], float Y2[], float H2[], float W2[]){
-string filename("data/level2.txt");
+//string filename("data/level2.txt");
+string filename("data/newlevel2.txt");
 
     string line;
     float x;

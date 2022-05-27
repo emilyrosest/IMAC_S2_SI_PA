@@ -48,7 +48,8 @@ public :
 
     Player *thomas_the_player;
 
-    QuadTree *quadtree;
+    QuadTree *quadtree_1;
+    QuadTree *quadtree_2;
 
     Map *map;
 

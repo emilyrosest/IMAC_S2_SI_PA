@@ -5,6 +5,7 @@
 const int MOVE_LEFT = 1;
 const int MOVE_RIGHT = 2;
 const int JUMP = 3;
+const int DOWN = 4;
 
 
 
@@ -24,18 +25,10 @@ public:
 
     void jump();
 
+    void down();
+
     bool win(Player winner);
 
-    bool free = true; //true si pas de collision, false sinon
-
-    //bool checkCollision(float x, float y);
-
-    /*
-    bool collisionTop(AABB* box);
-    bool collisionBottom(AABB* box);
-    bool collisionLeft(AABB* box);
-    bool collisionRight(AABB* box);
-    */
 
     Position position;
 

@@ -23,6 +23,10 @@ public :
             //allDecor[i] = createAABB(Position(X[i], Y[i]), H[i], W[i]);
             allDecor1[i] = createAABB(X1[i], Y1[i], H1[i], W1[i], colorbox);
         }
+
+        this->game->quadtree_1->insertAllDecor(allDecor1); 
+        this->game->quadtree_2->insertAllDecor(allDecor2);
+
         //bonnes coordonnées pour level 1:
         //thomas_the_player = new Player(0., 0., 2., 4., Color(0.3, 0.4, 0.5), 1);
         //thomas_the_winner = new Player(-20., 24., thomas_the_player->height, thomas_the_player->width, Color(1., 0., 0.), 0);
@@ -57,22 +61,7 @@ public :
 
 
 
-    //tests de collision
-    bool collision();
 
-    bool collision2(AABB* box);
-
-    void collision3(int direction);
-
-    bool collisionTop(AABB* box);
-    bool collisionBottom(AABB* box);
-    bool collisionLeft(AABB* box);
-    bool collisionRight(AABB* box);
-    
-    void testQuadTree();
-    void testSansQuadTree();
-
-    //-----------------------
 
     float X1[MAX_DECOR_COUNT];
     float Y1[MAX_DECOR_COUNT];

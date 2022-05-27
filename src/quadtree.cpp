@@ -41,16 +41,6 @@ void drawBox(AABB box) {
 
     //printf("%f\n", box.height);
 }
-/*
-bool collision(AABB box1, AABB box2) {
-    if((box2.position.x >= box1.position.x + box1.weight)      // trop à droite
-    || (box2.position.x + box2.weight <= box1.position.x) // trop à gauche
-    || (box2.position.y >= box1.position.y + box1.height) // trop en bas
-    || (box2.position.y + box2.height <= box1.position.y))  // trop en haut
-          return false; 
-   else
-          return true; 
-} */
 
 void QuadTree::initNodes() {
     if (topLeftTree == nullptr) {
@@ -103,8 +93,8 @@ void QuadTree::insertBox(AABB* box) {
     if (isLeaf() && boxCount < 4) {
         boxes[boxCount] = box;
         boxCount++;
-        glColor3f(0.4, 0.5, 0.2);
-        drawBox(*box);
+        //glColor3f(0.4, 0.5, 0.2);
+        //drawBox(*box);
         return;
     } 
 
@@ -217,60 +207,15 @@ void QuadTree::colli(float x, float y, float h, float w) {
         } else { 
             printf (" %d : pas de collision ", i); 
         } 
-        printf(" %f, %f \n", x + w, nodeToTest->boxes[i]->x);
-        printf(" %f, %f \n", x, nodeToTest->boxes[i]->x + abs(nodeToTest->boxes[i]->width));
-        printf(" %f, %f \n", y + h, nodeToTest->boxes[i]->y);
-        printf(" %f, %f \n", y, nodeToTest->boxes[i]->y + abs(nodeToTest->boxes[i]->height));
-
-        //printf(" val abs %f ", abs(nodeToTest->boxes[i]->width) );
-        /*
-        if (!(p.x + w < nodeToTest->boxes[i]->position.x)) {
-            printf(" collision a droite ");
-        }
-        if (!(p.x > nodeToTest->boxes[i]->position.x + abs(nodeToTest->boxes[i]->weight))) {
-            printf(" collision a gauche ");
-        }
-        if (!(p.y + h < nodeToTest->boxes[i]->position.y )) {
-            printf(" collision en haut ");
-        }
-        if (!(p.y > nodeToTest->boxes[i]->position.y + abs(nodeToTest->boxes[i]->height))) {
-            printf(" collision en bas ");
-        }
-        */
     }
 }
 
 bool QuadTree::colliBool(float x, float y, float h, float w) {
     QuadTree* nodeToTest = this->search2(x, y);
-    printf("boxCount = %d \n ", nodeToTest->getBoxCount());
     for (int i = 0; i < nodeToTest->getBoxCount(); i++) {
         if (!(x + w < nodeToTest->boxes[i]->x || x > nodeToTest->boxes[i]->x + abs(nodeToTest->boxes[i]->width) || y + h < nodeToTest->boxes[i]->y || y > nodeToTest->boxes[i]->y + abs(nodeToTest->boxes[i]->height))) {
-            printf(" %d : collision ", i);
             return true;
         } 
-        printf(" %f, %f \n", x + w, nodeToTest->boxes[i]->x);
-        printf(" %f, %f \n", x, nodeToTest->boxes[i]->x + abs(nodeToTest->boxes[i]->width));
-        printf(" %f, %f \n", y + h, nodeToTest->boxes[i]->y);
-        printf(" %f, %f \n", y, nodeToTest->boxes[i]->y + abs(nodeToTest->boxes[i]->height));
-
-        //printf(" val abs %f ", abs(nodeToTest->boxes[i]->width) );
-        /*
-        if (!(p.x + w < nodeToTest->boxes[i]->position.x)) {
-            printf(" collision a droite ");
-        }
-        if (!(p.x > nodeToTest->boxes[i]->position.x + abs(nodeToTest->boxes[i]->weight))) {
-            printf(" collision a gauche ");
-        }
-        if (!(p.y + h < nodeToTest->boxes[i]->position.y )) {
-            printf(" collision en haut ");
-        }
-        if (!(p.y > nodeToTest->boxes[i]->position.y + abs(nodeToTest->boxes[i]->height))) {
-            printf(" collision en bas ");
-        }
-        */
     }
-    
-    printf( "pas de collision \n ");
     return false;
-    
 }

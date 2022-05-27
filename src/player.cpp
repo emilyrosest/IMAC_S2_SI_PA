@@ -34,40 +34,21 @@ void Player::updateThomasPosition(int direction) {
     d = 1; // a changer
     switch (direction) {
         case MOVE_LEFT :
-            /*
-            if(this->free == true){
-                this->x -= d;
-            }
-            else{
-                printf("collision à gauche");
-            }
-            */
             this->x -= d;
-            
             break;
+
         case MOVE_RIGHT :
-            /*
-              if(this->free == true){
-                this->x += d;
-            }
-            else{
-                printf("collision à droite");
-            }
-            */
             this->x += d;
             break;
+
         case JUMP :
-            /*
-            if(this->free == true){
-                printf("pret a sauter \n");
-                jump();
-            }
-            else{
-                printf("ouch la tete");
-            }
-            */
             jump();
             break;
+
+        case DOWN :
+            down();
+            break;
+
         default:
             break;
     }
@@ -83,6 +64,10 @@ void Player::jump() {
     //}
     this->y += 2;
     //pas fini
+}
+
+void Player::down() {
+    this->y -= 2;
 }
 
 bool Player::win(Player winner) {
