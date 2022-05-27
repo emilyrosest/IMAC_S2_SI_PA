@@ -35,7 +35,7 @@ public :
         
         thomas_the_mover_1 = new Player(0., 0., 2., 4., Color(0.3, 0.4, 0.5), 1);
 
-        thomas_the_winner_1 = new Player(-9., 0., thomas_the_mover_1->height, thomas_the_mover_1->width, Color(1., 1., 1.), 0);
+        thomas_the_winner_1 = new Player(-20., 24., thomas_the_mover_1->height, thomas_the_mover_1->width, Color(1., 1., 1.), 0);
 
         thomas_the_mover_2 = new Player(-5., 0., 3., 6., Color(0.7, 0.1, 0.5), 1);
 
@@ -59,7 +59,9 @@ public :
 
     void changePlayer();
 
+    void move(int direction);
 
+    void move2(int direction);
 
 
 

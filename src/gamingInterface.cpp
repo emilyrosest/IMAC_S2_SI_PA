@@ -54,31 +54,50 @@ void GamingInterface::handleEvents() {
                 switch (e.key.keysym.sym) { // Quelle touche est appuyée ?
                     case SDLK_q:
                     case SDLK_LEFT:
+                        /*
                         if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
                             thomas_the_player->updateThomasPosition(MOVE_LEFT);
-                        }
+                        } 
+                        */
+                        //move(MOVE_LEFT);
+                        thomas_the_player->updateThomasPosition(MOVE_LEFT, 0.5);
+                        move2(MOVE_RIGHT);
                         break;
 
                     case SDLK_d:
                     case SDLK_RIGHT:
+                        /*
                         if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
                             thomas_the_player->updateThomasPosition(MOVE_RIGHT);
-                        }
+                        } */
+                        //move(MOVE_RIGHT);
+                        thomas_the_player->updateThomasPosition(MOVE_RIGHT, 0.5);
+                        move2(MOVE_LEFT);
                         break;
 
                     case SDLK_SPACE:
                     case SDLK_z:
                     case SDLK_UP:
+                        /*
                         if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
                             thomas_the_player->updateThomasPosition(JUMP);
-                        }
+                        } 
+                        */
+                        //move(JUMP);
+                        thomas_the_player->updateThomasPosition(JUMP, 0.5);
+                        move2(DOWN);
                         break;
 
                     case SDLK_s:
                     case SDLK_DOWN:
+                        /*
                         if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
                             thomas_the_player->updateThomasPosition(DOWN);
-                        }
+                        } 
+                        */
+                        //move(DOWN);
+                        thomas_the_player->updateThomasPosition(DOWN, 0.5);
+                        move2(JUMP);
                         break;
 
                     case SDLK_RETURN:
@@ -86,12 +105,14 @@ void GamingInterface::handleEvents() {
                         printf("ca veut ending \n");
                         game->changeInterfaceToEnding();
                         break; 
+
                     case SDLK_i:
                         if (game->getLevel() == 2) {
                             changePlayer();
                             printf(" ca change player ");
                         }
                         break; 
+
                     default:
                         break;
                 }
@@ -121,12 +142,6 @@ void GamingInterface::update() {
         }
     } 
     if (game->getLevel() == 2) {
-        /*
-        if (thomas_the_mover_1->win(*thomas_the_winner_1)) {
-            //thomas_the_mover_1 = new Player(thomas_the_winner_1->x, thomas_the_winner_1->y, thomas_the_mover_1->height, thomas_the_player->width, Color(1., 1., 1.), 1);
-            drawBox(createAABB(thomas_the_winner_1->x, thomas_the_winner_1->y, thomas_the_winner_1->height, thomas_the_winner_1->width, Color(1., 1., 1.)));
-            thomas_the_player = thomas_the_mover_2;
-        } */
         if (thomas_the_mover_1->win(*thomas_the_winner_1) && thomas_the_mover_2->win(*thomas_the_winner_2)) { 
             game->changeInterfaceToEnding();
         }
@@ -155,6 +170,10 @@ void GamingInterface::render() {
         if (thomas_the_mover_1->win(*thomas_the_winner_1)) {
             drawBox(createAABB(thomas_the_winner_1->x, thomas_the_winner_1->y, thomas_the_winner_1->height, thomas_the_winner_1->width, Color(1., 1., 1.)));
             thomas_the_player = thomas_the_mover_2;
+        }
+        if (thomas_the_mover_2->win(*thomas_the_winner_2)) {
+            drawBox(createAABB(thomas_the_winner_2->x, thomas_the_winner_2->y, thomas_the_winner_2->height, thomas_the_winner_2->width, Color(1., 1., 1.)));
+            thomas_the_player = thomas_the_mover_1;
         }
 
     }
@@ -189,5 +208,76 @@ void GamingInterface::changePlayer() {
     }
 }
 
+void GamingInterface::move(int direction) {
+    if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
+        thomas_the_player->updateThomasPosition(direction, 1);
+    } 
+    
+    /* 
+    else {
+        while (this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width))
+        {
+        if (direction == MOVE_LEFT) {
+            thomas_the_player->updateThomasPosition(MOVE_RIGHT);
+            return;
+        }
+        if (direction == MOVE_RIGHT) {
+            thomas_the_player->updateThomasPosition(MOVE_LEFT);
+            return;
+        }
+        if (direction == JUMP) {
+            thomas_the_player->updateThomasPosition(DOWN);
+            return;
+        }
+        if (direction == DOWN) {
+            thomas_the_player->updateThomasPosition(JUMP);
+            return;
+        }
+        }
+    } */
+    /*    
+        if (direction == MOVE_LEFT) {
 
+            return;
+        }
+        if (direction == MOVE_RIGHT) {
+
+            return;
+        }
+        if (direction == JUMP) {
+
+            return;
+        }
+        if (direction == DOWN) {
+
+            return;
+        }
+    } */
+    /*
+    else {
+        if (direction == MOVE_LEFT) {
+            thomas_the_player->updateThomasPosition(MOVE_RIGHT);
+            return;
+        }
+        if (direction == MOVE_RIGHT) {
+            thomas_the_player->updateThomasPosition(MOVE_LEFT);
+            return;
+        }
+        if (direction == JUMP) {
+            thomas_the_player->updateThomasPosition(DOWN);
+            return;
+        }
+        if (direction == DOWN) {
+            thomas_the_player->updateThomasPosition(JUMP);
+            return;
+        }
+    }
+    */
+}
+
+void GamingInterface::move2(int direction) {
+    if (this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
+        thomas_the_player->updateThomasPosition(direction, 0.5);
+    } 
+}
 

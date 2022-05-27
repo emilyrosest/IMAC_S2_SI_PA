@@ -29,9 +29,10 @@ void Player::drawPlayer(){
     glEnd();
 }
 
-void Player::updateThomasPosition(int direction) {  
-    float d;
-    d = 1; // a changer
+void Player::updateThomasPosition(int direction, float d) {      
+    
+    //d = 1;
+
     switch (direction) {
         case MOVE_LEFT :
             this->x -= d;
@@ -42,11 +43,16 @@ void Player::updateThomasPosition(int direction) {
             break;
 
         case JUMP :
-            jump();
+            //jump();
+            this->y += d;
             break;
 
         case DOWN :
-            down();
+            //down();
+            this->y -= d;
+            break;
+
+        case NONE :
             break;
 
         default:
@@ -62,12 +68,12 @@ void Player::jump() {
     //for (int i = 0; i < 2; i++) {
         //Y -= float(i)/100. * SDL_GetTicks();
     //}
-    this->y += 2;
+    this->y += 1;
     //pas fini
 }
 
 void Player::down() {
-    this->y -= 2;
+    this->y -= 1;
 }
 
 bool Player::win(Player winner) {
