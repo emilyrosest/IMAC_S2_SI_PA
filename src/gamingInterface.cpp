@@ -157,11 +157,15 @@ void GamingInterface::render() {
         glPopMatrix();
 
         if (thomas_the_mover_3->win(*thomas_the_winner_3)) {
-            drawBox(createAABB(thomas_the_winner_3->x, thomas_the_winner_3->y, thomas_the_winner_3->height, thomas_the_winner_3->width, Color(1., 1., 1.)));
+            Square* goal = new Square(thomas_the_winner_3->x, thomas_the_winner_3->y, thomas_the_winner_3->height, thomas_the_winner_3->width, Color(1., 1., 1.), 1);
+            goal->drawSquare();
+            //drawBox(createAABB(thomas_the_winner_3->x, thomas_the_winner_3->y, thomas_the_winner_3->height, thomas_the_winner_3->width, Color(1., 1., 1.)));
             thomas_the_player = thomas_the_mover_2;
         }
         if (thomas_the_mover_2->win(*thomas_the_winner_2)) {
-            drawBox(createAABB(thomas_the_winner_2->x, thomas_the_winner_2->y, thomas_the_winner_2->height, thomas_the_winner_2->width, Color(1., 1., 1.)));
+            Square* goal_2 = new Square(thomas_the_winner_2->x, thomas_the_winner_2->y, thomas_the_winner_2->height, thomas_the_winner_2->width, Color(1., 1., 1.), 1);
+            goal_2->drawSquare();
+            //drawBox(createAABB(thomas_the_winner_2->x, thomas_the_winner_2->y, thomas_the_winner_2->height, thomas_the_winner_2->width, Color(1., 1., 1.)));
             thomas_the_player = thomas_the_mover_3;
         }
 
