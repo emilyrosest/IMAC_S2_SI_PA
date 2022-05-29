@@ -30,19 +30,29 @@ void Player::drawPlayer(){
 }
 
 void Player::updateThomasPosition(int direction) {  
-    float d;
-    d = 1; // a changer
+    //float d;
+    //d = 1; // a changer
+    double v_grav, v_jump, v_air;
+    v_grav = 0.08;
+    v_jump = -4;
+ 
+    v_air = 1.5;
+
     switch (direction) {
         case MOVE_LEFT :
-            this->x -= d;
+            //this->x -= d;
+            this->x -= v_air;
             break;
 
         case MOVE_RIGHT :
-            this->x += d;
+            //this->x += d;
+            this->x += v_air;
             break;
 
         case JUMP :
-            jump();
+            
+            printf("floor : %d\n", this->floor);
+            jump(this->floor);
             break;
 
         case DOWN :
@@ -55,15 +65,77 @@ void Player::updateThomasPosition(int direction) {
 }
 
 
-void Player::jump() {
-    //for (int i = 0; i < 2; i++) {
-      //  Y += float(i)/1000. * SDL_GetTicks();
+void Player::jump(int floor) {
+    
+    int dy = 0;
+    dy += 1;
+
+    if (this->y >= floor + 2){
+        dy =  -2;
+    }
+
+    this->y += dy;
+
+    printf("%d\n", dy);
+
+    /*
+    for (int i = 0; i < 2; i++) {
+        this->y += float(i)/1000. * SDL_GetTicks();
+    }
+    
+    for (int i = 0; i < 2; i++) {
+        this->y -= float(i)/1200. * SDL_GetTicks();
+    }
+    //this->y += 2;
+    */
+    
+
+
+    /*
+    double v_y, v_grav;
+
+    v_grav = 0.08;
+    v_y = -4;
+
+    
+    int done;
+    for (done = 0; !done; SDL_Delay(10)) {
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            switch (event.type) {
+            case SDL_QUIT:
+                done = 1;
+                break;
+            
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym) {
+                case SDLK_ESCAPE: 
+                    done = 1; 
+                    break;
+            //direction en vol
+                case SDLK_LEFT: 
+                    this->x = -1.5; 
+                    break;
+                case SDLK_RIGHT: 
+                    this->x = 1.5; 
+                    break;
+                }
+                break;
+            }  
+        }                 
+            
+
+  
+        // evolution de la position 
+        //this->x += 1.5;
+        this->y += v_y;
+ 
+        //evolution de la vitesse 
+        v_y += v_grav;
+
+        
     //}
-    //for (int i = 0; i < 2; i++) {
-        //Y -= float(i)/100. * SDL_GetTicks();
-    //}
-    this->y += 2;
-    //pas fini
+*/
 }
 
 void Player::down() {
@@ -74,7 +146,7 @@ bool Player::win(Player winner) {
     return (this->x == winner.x && this->y == winner.y);
 }
 
-
+  
 
 
 

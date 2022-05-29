@@ -50,7 +50,7 @@ void GamingInterface::handleEvents() {
                 
             /* Touche clavier */
             case SDL_KEYDOWN:
-
+                
                 switch (e.key.keysym.sym) { // Quelle touche est appuyée ?
                     case SDLK_q:
                     case SDLK_LEFT:
@@ -70,6 +70,7 @@ void GamingInterface::handleEvents() {
                     case SDLK_z:
                     case SDLK_UP:
                         if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
+                            
                             thomas_the_player->updateThomasPosition(JUMP);
                         }
                         break;
