@@ -11,9 +11,11 @@ class EndingInterface {
 
 public :
     EndingInterface(Game* game) {
+
         EndingInterface::game = game;
 
-        EndingInterface::EndingBackground = IMG_Load("assets/ending.png");
+        EndingInterface::EndingBackground = IMG_Load("assets/end.png");
+
         initBackground();
     }
 

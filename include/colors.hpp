@@ -11,8 +11,6 @@ public:
     Color(float r, float g, float b);
 
     Color initRandomColor(Color colorbox);
-    
-    //void chooseRandomColor(Color color);
 
     float r;
     float g;

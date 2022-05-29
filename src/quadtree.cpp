@@ -12,8 +12,6 @@ AABB createAABB(float x, float y, float h, float w, Color c) {
     box.y = y;
     box.height = h;
     box.width = w;
-    c.initRandomColor(c);
-    //printf("%f", c.b);
     box.color = c;
     return box;
 }
@@ -27,13 +25,6 @@ void drawBox(AABB box) {
     Color c = box.color;
 
     c = c.initRandomColor(box.color);
-    
-    //choisir cette couleur de façon random
-    /*
-    Color colorsbox;
-    colorsbox.chooseRandomColor();
-    */
-    /////////
     
     glColor3f(c.r, c.g, c.b);
     glBegin(GL_QUADS);
@@ -58,7 +49,6 @@ void QuadTree::initNodes() {
     if (bottomRightTree == nullptr) {
         bottomRightTree = new QuadTree(Position((bottomRight.x + topLeft.x) /2, (bottomRight.y + topLeft.y) /2), Position(bottomRight.x, bottomRight.y));
     }
-    //drawLine();
 }
 
 bool QuadTree::isLeaf() {
@@ -198,39 +188,56 @@ AABB** QuadTree::searchAABB(float x, float y) {
 
 
 void QuadTree::colli(float x, float y, float h, float w) {
+
     QuadTree* nodeToTest = this->search2(x, y);
+
     printf("boxCount = %d \n ", nodeToTest->getBoxCount());
+
     for (int i = 0; i < nodeToTest->getBoxCount(); i++) {
+
         if (!(x + w < nodeToTest->boxes[i]->x || x > nodeToTest->boxes[i]->x + abs(nodeToTest->boxes[i]->width) || y + h < nodeToTest->boxes[i]->y || y > nodeToTest->boxes[i]->y + abs(nodeToTest->boxes[i]->height))) {
             printf(" %d : collision ", i);
-        } else { 
+        } 
+        else { 
             printf (" %d : pas de collision ", i); 
         } 
+
     }
 }
 
 bool QuadTree::colliBool(float x, float y, float h, float w) {
     
     QuadTree* nodeToTest = this->search2(x, y);
+
     for (int i = 0; i < nodeToTest->getBoxCount(); i++) {
+
         if (!(x + w < nodeToTest->boxes[i]->x || x > nodeToTest->boxes[i]->x + abs(nodeToTest->boxes[i]->width) || y + h < nodeToTest->boxes[i]->y || y > nodeToTest->boxes[i]->y + abs(nodeToTest->boxes[i]->height))) {
+            
             return true;
+
         } 
     } 
+
     return false;
 }
 
 int QuadTree::isOnTheFloor(float x, float y, float h, float w){
+
     QuadTree* nodeToTest = this->search2(x, y);
+
     int isOnTheFloor;
+
     for (int i = 0; i < nodeToTest->getBoxCount(); i++) {
+
         if (!( y + h <= nodeToTest->boxes[i]->y || y >= nodeToTest->boxes[i]->y + abs(nodeToTest->boxes[i]->height))) {
+
             isOnTheFloor = 1;
-            //return isOnTheFloor;
         }
         else{
+
             isOnTheFloor = 0;
         }
     }
+    
     return isOnTheFloor;
- }
+}

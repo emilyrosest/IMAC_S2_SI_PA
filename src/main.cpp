@@ -23,16 +23,14 @@ int main(int argc, char** argv)
 
     while(game->running()) {
         
-        Uint32 startTime = SDL_GetTicks(); /* Recuperation du temps au debut de la boucle */
+        Uint32 startTime = SDL_GetTicks();
     
-        
         game->swap();
+
         game->refresh();
         
-        
-        /* Calcul du temps ecoule */
         Uint32 elapsedTime = SDL_GetTicks() - startTime;
-        /* Si trop peu de temps s'est ecoule, on met en pause le programme */
+
         if(elapsedTime < FRAMERATE_MILLISECONDS) 
         {
             SDL_Delay(FRAMERATE_MILLISECONDS - elapsedTime);

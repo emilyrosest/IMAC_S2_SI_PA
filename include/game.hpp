@@ -21,8 +21,6 @@ public :
 
     Game();
 
-    //~Game(){};
-
     void setRunning(int newState) { isRunning = newState; }
 
     int running() { return isRunning; };
@@ -36,7 +34,6 @@ public :
 
     void onWindowResized(unsigned int width, unsigned int height);
 
-    /* Dimensions initiales et titre de la fenetre */
     static const unsigned int WINDOW_WIDTH = 800;
     static const unsigned int WINDOW_HEIGHT = 600;
     

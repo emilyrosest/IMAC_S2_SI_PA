@@ -1,5 +1,4 @@
 #include "../include/endingInterface.hpp"
-
 #include "../include/square.hpp"
 #include "../include/player.hpp"
 
@@ -8,7 +7,7 @@
 void EndingInterface::handleEvents() {
     SDL_Event event = game->e;
     while(SDL_PollEvent(&event)) {
-        /* L'utilisateur ferme la fenetre : */
+        
 		if(event.type == SDL_QUIT) {
             clean();
 			game->setRunning(0);
@@ -26,7 +25,6 @@ void EndingInterface::handleEvents() {
             case SDL_WINDOWEVENT:
                 switch (event.window.event) 
                 {
-                    /* Redimensionnement fenetre */
                     case SDL_WINDOWEVENT_RESIZED:
                         game->onWindowResized(event.window.data1, event.window.data2);                
                         break;
@@ -36,11 +34,6 @@ void EndingInterface::handleEvents() {
                 }
                 break;
 
-            /* Clic souris */
-            case SDL_MOUSEBUTTONUP:
-                printf("clic en (%d, %d)\n", event.button.x, event.button.y);
-                break;
-                    
             default:
                 break;
         }
@@ -59,6 +52,7 @@ void EndingInterface::initBackground() {
     glGenTextures(1, &texture_2);
 
     glBindTexture(GL_TEXTURE_2D, texture_2);
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, EndingBackground->w, EndingBackground->h, 0, GL_RGB, GL_UNSIGNED_BYTE, EndingBackground->pixels);
@@ -100,6 +94,7 @@ void EndingInterface::render() {
 
     glColor3f(1., 1., 1.);
     drawBox(createAABB(-50., -50., 100., 100., Color(1., 1., 1.)));
+    
     Square* back = new Square(-50., -50., 100., 100., Color(1., 1., 1.), 1);
     back->drawSquare();
 

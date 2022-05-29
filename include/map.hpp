@@ -3,26 +3,19 @@
 #include <SDL2/SDL_image.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-
-#include "square.hpp"
-
-
 #include <iostream>
 #include <cstring>
 #include <fstream>
 #include <sstream>
 
+#include "square.hpp"
 
 using namespace std;
-
 
 
 class Map {
 public :
     Map();
-
-    //~Map() {};
 
     static const int MAP_WIDTH = 1000;
 
@@ -33,8 +26,6 @@ public :
     void initLevel2(float X2[], float Y2[], float H2[], float W2[]);
 
     void InitMap();
-
-    void drawMap();
 
 
 private :

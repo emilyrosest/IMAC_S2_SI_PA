@@ -25,8 +25,6 @@ public :
 
         this->game->quadtree_1->insertAllDecor(allDecor1); 
 
-        
-        
         thomas_the_mover_1 = new Player(0., 0., 2., 4., Color(0.3, 0.4, 0.5), 1);
 
         thomas_the_winner_1 = new Player(-20., 24., thomas_the_mover_1->height, thomas_the_mover_1->width, Color(1., 1., 1.), 0);
@@ -95,14 +93,13 @@ public :
 
     Player* thomas_the_player;
 
-
-
     Game* game;
 
 
 private :
 
     AABB allDecor1[MAX_DECOR_COUNT];
+
     AABB allDecor2[MAX_DECOR_COUNT_2];
 
     Map* map;

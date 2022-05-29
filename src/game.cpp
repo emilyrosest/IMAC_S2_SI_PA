@@ -10,14 +10,14 @@
 
 
 SDL_Renderer *Game::renderer = nullptr;
-//....
+
 Map *map = nullptr;
 
 StartingInterface* startingInterface = nullptr;
+
 GamingInterface* gamingInterface = nullptr;
+
 EndingInterface* endingInterface = nullptr;
-
-
 
 
 Game::Game() {
@@ -27,16 +27,11 @@ Game::Game() {
     this->quadtree_1 = new QuadTree(Position(-60., 60.), Position(60., -60.)); 
     this->quadtree_2 = new QuadTree(Position(-60., 60.), Position(60., -60.));
     
-
-
-    /* Initialisation de la SDL */
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         const char* error = SDL_GetError();
         fprintf(stderr, "Erreur lors de l'intialisation de la SDL : %s\n", error);
         SDL_Quit();
     }
-
-    /* Ouverture d'une fenetre et creation d'un contexte OpenGL */
     
     {
         window = SDL_CreateWindow(WINDOW_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
@@ -70,7 +65,6 @@ Game::Game() {
 
     onWindowResized(WINDOW_WIDTH, WINDOW_HEIGHT);
     
-
     isRunning = 1;
 }
 
@@ -79,7 +73,6 @@ Game::Game() {
 void Game::refresh() {
     if (startingInterface->isActive()) {
         startingInterface->handleEvents();
-        //startingInterface->update();
         startingInterface->render();
     }
     if (gamingInterface->isActive()) {
@@ -90,7 +83,6 @@ void Game::refresh() {
     }
     if (endingInterface->isActive()) {
         endingInterface->handleEvents();
-        endingInterface->update();
         endingInterface->render();
     }
 }

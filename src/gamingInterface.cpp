@@ -17,7 +17,7 @@ void GamingInterface::prepare() {
 void GamingInterface::handleEvents() {
     SDL_Event e = game->e;
     while(SDL_PollEvent(&e)) {
-        /* L'utilisateur ferme la fenetre : */
+   
 		if(e.type == SDL_QUIT) {
 			game->setRunning(0);
 			break;
@@ -33,7 +33,7 @@ void GamingInterface::handleEvents() {
             case SDL_WINDOWEVENT:
                 switch (e.window.event) 
                 {
-                    /* Redimensionnement fenetre */
+                  
                     case SDL_WINDOWEVENT_RESIZED:
                         game->onWindowResized(e.window.data1, e.window.data2);                
                         break;
@@ -43,12 +43,7 @@ void GamingInterface::handleEvents() {
                 }
                 break;
 
-            /* Clic souris */
-            case SDL_MOUSEBUTTONUP:
-                //printf("clic en (%d, %d)\n", e.button.x, e.button.y);
-                break;
-                
-            /* Touche clavier */
+            
             case SDL_KEYDOWN:
                 
                 switch (e.key.keysym.sym) { 
@@ -68,15 +63,12 @@ void GamingInterface::handleEvents() {
                     case SDLK_z:
                     case SDLK_UP:
                         thomas_the_player->isOnTheFloor = this->game->quadtree_1->isOnTheFloor(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width);
-                        printf("isOnTheFloor = %d\n", thomas_the_player->isOnTheFloor);
                         thomas_the_player->updateThomasPosition(JUMP, 0.5);
-                        move(DOWN);
                         break;
 
                     case SDLK_s:
                     case SDLK_DOWN:
                         thomas_the_player->updateThomasPosition(DOWN, 0.5);
-                        move(JUMP);
                         break;
 
                     case SDLK_RETURN: //raccourci ;D
@@ -107,22 +99,28 @@ void GamingInterface::update() {
     camera(thomas_the_player->x, thomas_the_player->y);
 
     if (game->getLevel() == 1) {
+
         if (thomas_the_mover_1->win(*thomas_the_winner_1)) {
+
             game->levelUp();
+
             game->map->initLevel2(X2, Y2, H2, W2);
+
             for (int i = 0; i < MAX_DECOR_COUNT_2; i++){
                 allDecor2[i] = createAABB(X2[i], Y2[i], H2[i], W2[i], colorbox);
             }
+
             this->game->quadtree_2->insertAllDecor(allDecor2);
             printf("level up! \n");
-
 
             thomas_the_player = thomas_the_mover_3;
 
         }
     } 
     if (game->getLevel() == 2) {
+
         if (thomas_the_mover_3->win(*thomas_the_winner_3) && thomas_the_mover_2->win(*thomas_the_winner_2)) { 
+
             game->changeInterfaceToEnding();
         }
     }
@@ -130,12 +128,17 @@ void GamingInterface::update() {
 
 void GamingInterface::render() {
     if (game->getLevel() == 1) {
+
         glPushMatrix();
+
         for (int i = 0; i < MAX_DECOR_COUNT; i++) {
             drawBox((allDecor1[i]));
         }
+
         thomas_the_winner_1->drawPlayer();
+
         thomas_the_mover_1->drawPlayer();
+
         glPopMatrix();
     } 
 
@@ -143,7 +146,9 @@ void GamingInterface::render() {
     
 
     if (game->getLevel() == 2) {
+
         glPushMatrix();
+
         for (int i = 0; i < MAX_DECOR_COUNT_2; i++) {
             drawBox((allDecor2[i]));
         }
@@ -157,16 +162,18 @@ void GamingInterface::render() {
         glPopMatrix();
 
         if (thomas_the_mover_3->win(*thomas_the_winner_3)) {
+
             Square* goal = new Square(thomas_the_winner_3->x, thomas_the_winner_3->y, thomas_the_winner_3->height, thomas_the_winner_3->width, Color(1., 1., 1.), 1);
             goal->drawSquare();
-            //drawBox(createAABB(thomas_the_winner_3->x, thomas_the_winner_3->y, thomas_the_winner_3->height, thomas_the_winner_3->width, Color(1., 1., 1.)));
             thomas_the_player = thomas_the_mover_2;
+
         }
         if (thomas_the_mover_2->win(*thomas_the_winner_2)) {
+
             Square* goal_2 = new Square(thomas_the_winner_2->x, thomas_the_winner_2->y, thomas_the_winner_2->height, thomas_the_winner_2->width, Color(1., 1., 1.), 1);
             goal_2->drawSquare();
-            //drawBox(createAABB(thomas_the_winner_2->x, thomas_the_winner_2->y, thomas_the_winner_2->height, thomas_the_winner_2->width, Color(1., 1., 1.)));
             thomas_the_player = thomas_the_mover_3;
+
         }
 
     }
@@ -190,12 +197,10 @@ void GamingInterface::camera(float x, float y) {
 
 void GamingInterface::changePlayer() {
     if (thomas_the_player == thomas_the_mover_3) {
-        printf(" je suis le 1e ");
         thomas_the_player = thomas_the_mover_2;
         return;
     }
     if (thomas_the_player == thomas_the_mover_2) {
-        printf(" je suis le 2e ");
         thomas_the_player = thomas_the_mover_3;
         return;
     }
@@ -203,10 +208,12 @@ void GamingInterface::changePlayer() {
 
 
 void GamingInterface::move(int direction) {
+    
     if (game->getLevel() == 1) {
         if (this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
             thomas_the_player->updateThomasPosition(direction, 0.5);
         } 
+        
     }
     if (game->getLevel() == 2) {
         if (this->game->quadtree_2->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {

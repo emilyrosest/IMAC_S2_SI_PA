@@ -11,9 +11,11 @@ class StartingInterface {
 
 public :
     StartingInterface(Game* game) {
+
         StartingInterface::game = game;
 
         StartingInterface::StartingBackground = IMG_Load("assets/debut.png"); 
+
         initBackground();
     }
 
@@ -41,6 +43,7 @@ public :
     void clean();
 
 private :
+
     Game* game;
 
     SDL_Surface* StartingBackground;

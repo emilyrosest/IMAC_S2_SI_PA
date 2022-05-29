@@ -15,13 +15,15 @@ typedef struct AABB {
 
 
 AABB createAABB(float x, float y, float h, float w, Color c);
+
 void drawBox(AABB box);
 
 bool collision(AABB box1, AABB box2);
 
-
 const int MAX_DECOR_COUNT = 78;
+
 const int MAX_DECOR_COUNT_2 = 108;
+
 
 
 class QuadTree {
@@ -71,6 +73,7 @@ public :
     }
 
     Position getTopLeft() { return topLeft; };
+
     Position getBottomRight() { return bottomRight; };
 
     void initNodes();
@@ -98,6 +101,7 @@ public :
     void colli(float x, float y, float h, float w);
 
     bool colliBool(float x, float y, float h, float w);
+
     int isOnTheFloor(float x, float y, float h, float w);
 
 

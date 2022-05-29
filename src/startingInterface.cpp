@@ -1,5 +1,4 @@
 #include "../include/startingInterface.hpp"
-
 #include "../include/square.hpp"
 #include "../include/player.hpp"
 
@@ -8,7 +7,6 @@
 void StartingInterface::handleEvents() {
     SDL_Event event = game->e;
     while(SDL_PollEvent(&event)) {
-        /* L'utilisateur ferme la fenetre : */
 		if(event.type == SDL_QUIT) {
 			game->setRunning(0);
 			break;
@@ -24,7 +22,6 @@ void StartingInterface::handleEvents() {
             case SDL_WINDOWEVENT:
                 switch (event.window.event) 
                 {
-                    /* Redimensionnement fenetre */
                     case SDL_WINDOWEVENT_RESIZED:
                         game->onWindowResized(event.window.data1, event.window.data2);                
                         break;
@@ -34,12 +31,6 @@ void StartingInterface::handleEvents() {
                 }
                 break;
 
-            /* Clic souris */
-            case SDL_MOUSEBUTTONUP:
-                //printf("clic en (%d, %d)\n", event.button.x, event.button.y);
-                break;
-                
-            /* Touche clavier */
             case SDL_KEYDOWN:
 
                 switch (event.key.keysym.sym) { 
@@ -60,9 +51,6 @@ void StartingInterface::handleEvents() {
     }
 }
 
-void StartingInterface::update() {
-
-}
 
 void StartingInterface::initBackground() {
     if (StartingBackground == nullptr) {
@@ -72,6 +60,7 @@ void StartingInterface::initBackground() {
     glGenTextures(1, &texture);
 
     glBindTexture(GL_TEXTURE_2D, texture);
+    
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, StartingBackground->w, StartingBackground->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, StartingBackground->pixels);

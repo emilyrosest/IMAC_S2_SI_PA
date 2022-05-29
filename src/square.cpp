@@ -2,7 +2,7 @@
 #include <GL/glu.h>
 #include "../include/square.hpp"
 
-//version sans position
+
 void Square::drawSquare() {
 
     if(this->filled) {

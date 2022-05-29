@@ -11,9 +11,9 @@
 class Square {
 public :
 
-    //Square() {};
 
     Position position;
+    
     Color color;
 
     float height;
