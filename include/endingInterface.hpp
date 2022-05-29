@@ -14,7 +14,7 @@ public :
 
         EndingInterface::game = game;
 
-        EndingInterface::EndingBackground = IMG_Load("assets/end.png");
+        EndingInterface::EndingBackground = IMG_Load("assets/fin2.png");
 
         initBackground();
     }
