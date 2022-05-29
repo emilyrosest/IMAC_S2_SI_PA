@@ -13,7 +13,7 @@ public :
     StartingInterface(Game* game) {
         StartingInterface::game = game;
 
-        StartingInterface::StartingBackground = IMG_Load("assets/elmer.png"); //pas réussi à changer l'écran d'acceuil, erreur de segmentation
+        StartingInterface::StartingBackground = IMG_Load("assets/debut.png"); //pas réussi à changer l'écran d'acceuil, erreur de segmentation
         initBackground();
     }
 

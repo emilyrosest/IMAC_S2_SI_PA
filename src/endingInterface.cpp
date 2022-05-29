@@ -10,11 +10,13 @@ void EndingInterface::handleEvents() {
     while(SDL_PollEvent(&event)) {
         /* L'utilisateur ferme la fenetre : */
 		if(event.type == SDL_QUIT) {
+            clean();
 			game->setRunning(0);
 			break;
 		}
 		
 		if(	event.type == SDL_KEYDOWN && (event.key.keysym.sym == SDLK_ESCAPE)) {
+            clean();
 			game->setRunning(0);
 			break;
 		}
@@ -54,9 +56,9 @@ void EndingInterface::initBackground() {
         printf("erreur ");
     }
     
-    glGenTextures(1, &texture);
+    glGenTextures(1, &texture_2);
 
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, texture_2);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, EndingBackground->w, EndingBackground->h, 0, GL_RGB, GL_UNSIGNED_BYTE, EndingBackground->pixels);
@@ -67,7 +69,7 @@ void EndingInterface::initBackground() {
 
 void EndingInterface::draw() {
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, texture_2);
 
     glBegin(GL_QUADS);
             
@@ -97,6 +99,9 @@ void EndingInterface::render() {
     glScalef(0.1, 0.1, 0.);
 
     glColor3f(1., 1., 1.);
+    drawBox(createAABB(-50., -50., 100., 100., Color(1., 1., 1.)));
+    Square* back = new Square(-50., -50., 100., 100., Color(1., 1., 1.), 1);
+    back->drawSquare();
 
     draw();  
     
@@ -104,6 +109,6 @@ void EndingInterface::render() {
 
 void EndingInterface::clean() {
     SDL_FreeSurface(EndingBackground);
-    glDeleteTextures(1, &texture);
+    glDeleteTextures(1, &texture_2);
     glBindTexture(GL_TEXTURE_2D, 0);
 }

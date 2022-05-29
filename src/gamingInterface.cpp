@@ -54,16 +54,16 @@ void GamingInterface::handleEvents() {
                 switch (e.key.keysym.sym) { // Quelle touche est appuyée ?
                     case SDLK_q:
                     case SDLK_LEFT:
-                        if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
+                        //if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
                             thomas_the_player->updateThomasPosition(MOVE_LEFT);
-                        }
+                        //}
                         break;
 
                     case SDLK_d:
                     case SDLK_RIGHT:
-                        if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
+                        //if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
                             thomas_the_player->updateThomasPosition(MOVE_RIGHT);
-                        }
+                        //}
                         break;
 
                     case SDLK_SPACE:
@@ -87,7 +87,7 @@ void GamingInterface::handleEvents() {
 
                     case SDLK_RETURN:
                         //a enlever !!!!!
-                        printf("ca veut ending \n");
+                        printf("fini!\n");
                         game->changeInterfaceToEnding();
                         break; 
                     case SDLK_i:

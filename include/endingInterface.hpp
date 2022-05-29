@@ -13,7 +13,7 @@ public :
     EndingInterface(Game* game) {
         EndingInterface::game = game;
 
-        EndingInterface::EndingBackground = IMG_Load("assets/elmer2.png");
+        EndingInterface::EndingBackground = IMG_Load("assets/ending.png");
         initBackground();
     }
 
@@ -45,6 +45,6 @@ private :
 
     SDL_Surface* EndingBackground;
 
-    GLuint texture;
+    GLuint texture_2;
 
 };

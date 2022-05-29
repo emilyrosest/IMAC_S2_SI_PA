@@ -46,7 +46,7 @@ void StartingInterface::handleEvents() {
                     case SDLK_SPACE:
                     case SDLK_RETURN:
                         //initialiser les choses
-                        printf("ca veut jouer \n");
+                        printf("ca joue! \n");
                         //marche pas
                         //Game::thomas_the_player = new Player(0.0, 0.0, 2., 4., Color());
                         //QuadTree* quadtree = new QuadTree(Position(-20., 20.), Position(20., -20.));
@@ -78,7 +78,7 @@ void StartingInterface::initBackground() {
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, StartingBackground->w, StartingBackground->h, 0, GL_RGB, GL_UNSIGNED_BYTE, StartingBackground->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, StartingBackground->w, StartingBackground->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, StartingBackground->pixels);
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
