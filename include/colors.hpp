@@ -10,7 +10,7 @@ public:
 
     Color(float r, float g, float b);
 
-    void initRandomColor(Color colorbox);
+    Color initRandomColor(Color colorbox);
     
     //void chooseRandomColor(Color color);
 

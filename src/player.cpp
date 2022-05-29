@@ -30,28 +30,22 @@ void Player::drawPlayer(){
 }
 
 void Player::updateThomasPosition(int direction) {  
-    //float d;
-    //d = 1; // a changer
-    double v_grav, v_jump, v_air;
-    v_grav = 0.08;
-    v_jump = -4;
- 
-    v_air = 1.5;
 
+    float d = 1.5;
+    
     switch (direction) {
         case MOVE_LEFT :
-            //this->x -= d;
-            this->x -= v_air;
+            this->x -= d;
+            this->floor = this->y;
             break;
 
         case MOVE_RIGHT :
-            //this->x += d;
-            this->x += v_air;
+            this->x += d;
+            this->floor = this->y;
             break;
 
         case JUMP :
-            
-            printf("floor : %d\n", this->floor);
+            //printf("floor : %d\n", this->floor);
             jump(this->floor);
             break;
 
@@ -68,10 +62,13 @@ void Player::updateThomasPosition(int direction) {
 void Player::jump(int floor) {
     
     int dy = 0;
-    dy += 1;
+    dy += 2;
 
-    if (this->y >= floor + 2){
-        dy =  -2;
+    if (this->y >= floor + 4){
+        if(this->isOnTheFloor == 1){
+            dy = -4;
+        }
+        
     }
 
     this->y += dy;

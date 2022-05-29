@@ -14,7 +14,7 @@ Color::Color(float r, float g, float b) {
 }
 
 
-void Color::initRandomColor(Color colorbox){
+Color Color::initRandomColor(Color colorbox){
         //constexpr int MIN = 1;
     constexpr int MAX = 8;
 
@@ -80,6 +80,7 @@ void Color::initRandomColor(Color colorbox){
         colorbox.g = 1.;
         colorbox.b = 1.;
     }
+    return colorbox;
 
 }
     

@@ -25,12 +25,16 @@ void drawBox(AABB box) {
     float h = box.height;
     float w = box.width;
     Color c = box.color;
+
+    c = c.initRandomColor(box.color);
     
     //choisir cette couleur de façon random
     /*
     Color colorsbox;
     colorsbox.chooseRandomColor();
     */
+    /////////
+    
     glColor3f(c.r, c.g, c.b);
     glBegin(GL_QUADS);
     glVertex2f( x , y);
@@ -219,3 +223,18 @@ bool QuadTree::colliBool(float x, float y, float h, float w) {
     }
     return false;
 }
+
+int QuadTree::isOnTheFloor(float x, float y, float h, float w){
+    QuadTree* nodeToTest = this->search2(x, y);
+    int isOnTheFloor;
+    for (int i = 0; i < nodeToTest->getBoxCount(); i++) {
+        if (!( y + h <= nodeToTest->boxes[i]->y || y >= nodeToTest->boxes[i]->y + abs(nodeToTest->boxes[i]->height))) {
+            isOnTheFloor = 1;
+            //return isOnTheFloor;
+        }
+        else{
+            isOnTheFloor = 0;
+        }
+    }
+    return isOnTheFloor;
+ }

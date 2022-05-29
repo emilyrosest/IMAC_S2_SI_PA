@@ -96,6 +96,7 @@ public :
     void colli(float x, float y, float h, float w);
 
     bool colliBool(float x, float y, float h, float w);
+    int isOnTheFloor(float x, float y, float h, float w);
 
 
 };

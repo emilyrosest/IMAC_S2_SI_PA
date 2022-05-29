@@ -20,6 +20,7 @@ public:
     Player(float x, float y, float h, float w, Color color, int filled);
 
     int floor = 0;
+    int isOnTheFloor;
 
     void drawPlayer();
 
