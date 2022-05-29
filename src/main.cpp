@@ -15,22 +15,18 @@
 
 Game* game = nullptr;
 
-//Map *map = nullptr;
 
 int main(int argc, char** argv) 
 {
     game = new Game();
 
-    //printf("begin\n");
+
     while(game->running()) {
-        /* Recuperation du temps au debut de la boucle */
-        Uint32 startTime = SDL_GetTicks();
+        
+        Uint32 startTime = SDL_GetTicks(); /* Recuperation du temps au debut de la boucle */
     
         
-        /* Echange du front et du back buffer : mise a jour de la fenetre */
-        
         game->swap();
-        //game->handleEvents();
         game->refresh();
         
         

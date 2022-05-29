@@ -6,7 +6,6 @@
 
 
 #include "square.hpp"
-//#include "quadtree.hpp"
 
 
 #include <iostream>
@@ -37,11 +36,6 @@ public :
 
     void drawMap();
 
-    //QuadTree *quadtree;
-
-    //void cleanMap();
-
-    //void handleEvents(); /à voir si besoin ici*/
 
 private :
     

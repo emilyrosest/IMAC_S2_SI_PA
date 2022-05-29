@@ -3,7 +3,7 @@
 #include "../include/square.hpp"
 #include "../include/player.hpp"
 
-//Square squaretest = Square(0., 0., 10., 10., Color(0.4, 0.5, 0.2), 1);
+
 
 void StartingInterface::handleEvents() {
     SDL_Event event = game->e;
@@ -36,20 +36,16 @@ void StartingInterface::handleEvents() {
 
             /* Clic souris */
             case SDL_MOUSEBUTTONUP:
-                printf("clic en (%d, %d)\n", event.button.x, event.button.y);
+                //printf("clic en (%d, %d)\n", event.button.x, event.button.y);
                 break;
                 
             /* Touche clavier */
             case SDL_KEYDOWN:
 
-                switch (event.key.keysym.sym) { // Quelle touche est appuyée ?
+                switch (event.key.keysym.sym) { 
                     case SDLK_SPACE:
                     case SDLK_RETURN:
-                        //initialiser les choses
                         printf("ca joue! \n");
-                        //marche pas
-                        //Game::thomas_the_player = new Player(0.0, 0.0, 2., 4., Color());
-                        //QuadTree* quadtree = new QuadTree(Position(-20., 20.), Position(20., -20.));
                         clean();
                         game->changeInterfaceToGaming();
                         break;

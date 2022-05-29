@@ -43,7 +43,6 @@ void drawBox(AABB box) {
     glVertex2f( x , y + h);
     glEnd();
 
-    //printf("%f\n", box.height);
 }
 
 void QuadTree::initNodes() {
@@ -97,8 +96,6 @@ void QuadTree::insertBox(AABB* box) {
     if (isLeaf() && boxCount < 4) {
         boxes[boxCount] = box;
         boxCount++;
-        //glColor3f(0.4, 0.5, 0.2);
-        //drawBox(*box);
         return;
     } 
 
@@ -119,11 +116,9 @@ void QuadTree::insertBox(AABB* box) {
     } 
 }
 
-//Peut-être le bouger si besoin
 
 void QuadTree::insertAllDecor(AABB aabb_decor[]) {
     for (int i = 0; i < MAX_DECOR_COUNT; i++) {
-        //printf("%d\n", i);
         insertBox(&(aabb_decor[i]));
     }
 }
@@ -218,19 +213,10 @@ bool QuadTree::colliBool(float x, float y, float h, float w) {
     
     QuadTree* nodeToTest = this->search2(x, y);
     for (int i = 0; i < nodeToTest->getBoxCount(); i++) {
-        //glColor3f(0., 1., 0.);
-        //drawBox(*nodeToTest->boxes[i]);
         if (!(x + w < nodeToTest->boxes[i]->x || x > nodeToTest->boxes[i]->x + abs(nodeToTest->boxes[i]->width) || y + h < nodeToTest->boxes[i]->y || y > nodeToTest->boxes[i]->y + abs(nodeToTest->boxes[i]->height))) {
             return true;
         } 
-    } /*
-    for (int i = 0; i < this->search2(x, y)->getBoxCount(); i++) {
-        //glColor3f(0., 1., 0.);
-        //drawBox(*nodeToTest->boxes[i]);
-        if (!(x + w < this->search2(x, y)->boxes[i]->x || x > this->search2(x, y)->boxes[i]->x + abs(this->search2(x, y)->boxes[i]->width) || y + h < this->search2(x, y)->boxes[i]->y || y > this->search2(x, y)->boxes[i]->y + abs(this->search2(x, y)->boxes[i]->height))) {
-            return true;
-        } 
-    } */
+    } 
     return false;
 }
 

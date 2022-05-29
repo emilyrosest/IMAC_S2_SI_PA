@@ -5,15 +5,16 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-//#include "square.hpp"
+
 #include "player.hpp"
 #include "quadtree.hpp"
 #include "map.hpp"
 
+
 static const char WINDOW_TITLE[] = "Square Dash";
 
-/* Espace fenetre virtuelle */
 static const float GL_VIEW_SIZE = 2.;
+
 
 class Game {
 public :
@@ -32,7 +33,6 @@ public :
 
     void swap() { SDL_GL_SwapWindow(window); };
 
-    //void handleEvents();
 
     void onWindowResized(unsigned int width, unsigned int height);
 
@@ -40,7 +40,6 @@ public :
     static const unsigned int WINDOW_WIDTH = 800;
     static const unsigned int WINDOW_HEIGHT = 600;
     
-    //Renderer
 
     SDL_Event e;
 

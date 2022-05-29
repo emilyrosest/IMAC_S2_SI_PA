@@ -51,42 +51,35 @@ void GamingInterface::handleEvents() {
             /* Touche clavier */
             case SDL_KEYDOWN:
                 
-                switch (e.key.keysym.sym) { // Quelle touche est appuyée ?
+                switch (e.key.keysym.sym) { 
                     case SDLK_q:
                     case SDLK_LEFT:
                         thomas_the_player->updateThomasPosition(MOVE_LEFT, 0.5);
-                        move2(MOVE_RIGHT);
+                        move(MOVE_RIGHT);
                         break;
 
                     case SDLK_d:
                     case SDLK_RIGHT:
                         thomas_the_player->updateThomasPosition(MOVE_RIGHT, 0.5);
-                        move2(MOVE_LEFT);
+                        move(MOVE_LEFT);
                         break;
 
                     case SDLK_SPACE:
                     case SDLK_z:
                     case SDLK_UP:
-                    /*
-                        if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
-                            
-                            thomas_the_player->isOnTheFloor = this->game->quadtree_1->isOnTheFloor(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width);
-                            printf("isOnTheFloor = %d\n", thomas_the_player->isOnTheFloor);
-                            thomas_the_player->updateThomasPosition(JUMP);
-                            
-                        } */
+                        thomas_the_player->isOnTheFloor = this->game->quadtree_1->isOnTheFloor(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width);
+                        printf("isOnTheFloor = %d\n", thomas_the_player->isOnTheFloor);
                         thomas_the_player->updateThomasPosition(JUMP, 0.5);
-                        move2(DOWN);
+                        move(DOWN);
                         break;
 
                     case SDLK_s:
                     case SDLK_DOWN:
                         thomas_the_player->updateThomasPosition(DOWN, 0.5);
-                        move2(JUMP);
+                        move(JUMP);
                         break;
 
-                    case SDLK_RETURN:
-                        //a enlever !!!!!
+                    case SDLK_RETURN: //raccourci ;D
                         printf("fini!\n");
                         game->changeInterfaceToEnding();
                         break; 
@@ -94,7 +87,7 @@ void GamingInterface::handleEvents() {
                     case SDLK_i:
                         if (game->getLevel() == 2) {
                             changePlayer();
-                            printf(" ca change player ");
+                            printf(" changement de player! ");
                         }
                         break; 
 
@@ -116,15 +109,12 @@ void GamingInterface::update() {
     if (game->getLevel() == 1) {
         if (thomas_the_mover_1->win(*thomas_the_winner_1)) {
             game->levelUp();
-            //thomas_the_mover_1->x = 0.;
-            //thomas_the_mover_1->y = 0.;
             game->map->initLevel2(X2, Y2, H2, W2);
             for (int i = 0; i < MAX_DECOR_COUNT_2; i++){
-            //allDecor[i] = createAABB(Position(X[i], Y[i]), H[i], W[i]);
                 allDecor2[i] = createAABB(X2[i], Y2[i], H2[i], W2[i], colorbox);
             }
             this->game->quadtree_2->insertAllDecor(allDecor2);
-            printf("ca level up ");
+            printf("level up! \n");
 
 
             thomas_the_player = thomas_the_mover_3;
@@ -154,7 +144,6 @@ void GamingInterface::render() {
 
     if (game->getLevel() == 2) {
         glPushMatrix();
-        //drawBox(createAABB(-50., -50., 100., 100., Color(0., 0., 0.)));
         for (int i = 0; i < MAX_DECOR_COUNT_2; i++) {
             drawBox((allDecor2[i]));
         }
@@ -208,13 +197,8 @@ void GamingInterface::changePlayer() {
     }
 }
 
-void GamingInterface::move(int direction) {
-    if (!this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
-        thomas_the_player->updateThomasPosition(direction, 1);
-    } 
-}
 
-void GamingInterface::move2(int direction) {
+void GamingInterface::move(int direction) {
     if (game->getLevel() == 1) {
         if (this->game->quadtree_1->colliBool(thomas_the_player->x, thomas_the_player->y, thomas_the_player->height, thomas_the_player->width)) {
             thomas_the_player->updateThomasPosition(direction, 0.5);

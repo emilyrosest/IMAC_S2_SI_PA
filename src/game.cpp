@@ -1,7 +1,5 @@
 #include "game.hpp"
-//#include "map.hpp"
 
-//#include "quadtree.hpp"
 
 #include "startingInterface.hpp"
 #include "gamingInterface.hpp"
@@ -26,7 +24,7 @@ Game::Game() {
 
     glScalef(0.1, 0.1, 0.);
    
-    this->quadtree_1 = new QuadTree(Position(-60., 60.), Position(60., -60.)); //faire un constructeur qui prend en pram ces valeurs
+    this->quadtree_1 = new QuadTree(Position(-60., 60.), Position(60., -60.)); 
     this->quadtree_2 = new QuadTree(Position(-60., 60.), Position(60., -60.));
     
 
@@ -36,7 +34,6 @@ Game::Game() {
         const char* error = SDL_GetError();
         fprintf(stderr, "Erreur lors de l'intialisation de la SDL : %s\n", error);
         SDL_Quit();
-        //return EXIT_FAILURE;
     }
 
     /* Ouverture d'une fenetre et creation d'un contexte OpenGL */
@@ -47,7 +44,6 @@ Game::Game() {
             const char* error = SDL_GetError();
             fprintf(stderr, "Erreur lors de la creation de la fenetre : %s\n", error);
             SDL_Quit();
-            //return EXIT_FAILURE;
         }
     }
     
@@ -65,7 +61,6 @@ Game::Game() {
             fprintf(stderr, "Erreur lors de la creation du contexte OpenGL : %s\n", error);
             SDL_DestroyWindow(window);
             SDL_Quit();
-            //return EXIT_FAILURE;
         }
     }    
 
@@ -75,8 +70,6 @@ Game::Game() {
 
     onWindowResized(WINDOW_WIDTH, WINDOW_HEIGHT);
     
-    //Agrandir les mesures de la fenêtre
-    //glScale(0.1, 0.1, 0.)
 
     isRunning = 1;
 }
@@ -84,11 +77,6 @@ Game::Game() {
 
 
 void Game::refresh() {
-    //on va pouvoir suppr
-    /* 
-    //SDL_GL_SwapWindow(window);
-    map->drawMap(); */
-
     if (startingInterface->isActive()) {
         startingInterface->handleEvents();
         //startingInterface->update();
@@ -105,20 +93,12 @@ void Game::refresh() {
         endingInterface->update();
         endingInterface->render();
     }
-
-
 }
 
 void Game::clean() {
-
-
-    /* Liberation des ressources associees a la SDL */ 
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(window);
     SDL_Quit();
-    
-
-    //return EXIT_SUCCESS;
 }
 
 void Game::onWindowResized(unsigned int width, unsigned int height) {
