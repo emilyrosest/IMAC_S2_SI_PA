@@ -29,10 +29,10 @@ void Player::drawPlayer(){
     glEnd();
 }
 
-void Player::updateThomasPosition(int direction) {  
+void Player::updateThomasPosition(int direction, float d) {      
+    //float d = 1.5;
+    //d = 1;
 
-    float d = 1.5;
-    
     switch (direction) {
         case MOVE_LEFT :
             this->x -= d;
@@ -47,10 +47,16 @@ void Player::updateThomasPosition(int direction) {
         case JUMP :
             //printf("floor : %d\n", this->floor);
             jump(this->floor);
+            //jump();
+            //this->y += d;
             break;
 
         case DOWN :
-            down();
+            //down();
+            this->y -= d;
+            break;
+
+        case NONE :
             break;
 
         default:
@@ -136,7 +142,7 @@ void Player::jump(int floor) {
 }
 
 void Player::down() {
-    this->y -= 2;
+    this->y -= 1;
 }
 
 bool Player::win(Player winner) {

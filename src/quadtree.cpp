@@ -215,12 +215,22 @@ void QuadTree::colli(float x, float y, float h, float w) {
 }
 
 bool QuadTree::colliBool(float x, float y, float h, float w) {
+    
     QuadTree* nodeToTest = this->search2(x, y);
     for (int i = 0; i < nodeToTest->getBoxCount(); i++) {
+        //glColor3f(0., 1., 0.);
+        //drawBox(*nodeToTest->boxes[i]);
         if (!(x + w < nodeToTest->boxes[i]->x || x > nodeToTest->boxes[i]->x + abs(nodeToTest->boxes[i]->width) || y + h < nodeToTest->boxes[i]->y || y > nodeToTest->boxes[i]->y + abs(nodeToTest->boxes[i]->height))) {
             return true;
         } 
-    }
+    } /*
+    for (int i = 0; i < this->search2(x, y)->getBoxCount(); i++) {
+        //glColor3f(0., 1., 0.);
+        //drawBox(*nodeToTest->boxes[i]);
+        if (!(x + w < this->search2(x, y)->boxes[i]->x || x > this->search2(x, y)->boxes[i]->x + abs(this->search2(x, y)->boxes[i]->width) || y + h < this->search2(x, y)->boxes[i]->y || y > this->search2(x, y)->boxes[i]->y + abs(this->search2(x, y)->boxes[i]->height))) {
+            return true;
+        } 
+    } */
     return false;
 }
 

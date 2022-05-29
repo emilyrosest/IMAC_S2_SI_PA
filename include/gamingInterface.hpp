@@ -22,10 +22,12 @@ public :
         for (int i = 0; i < MAX_DECOR_COUNT; i++){
             //allDecor[i] = createAABB(Position(X[i], Y[i]), H[i], W[i]);
             allDecor1[i] = createAABB(X1[i], Y1[i], H1[i], W1[i], colorbox);
+            //allDecor2[i] = createAABB(X1[i], Y1[i], H1[i], W1[i], colorbox);
         }
 
+
         this->game->quadtree_1->insertAllDecor(allDecor1); 
-        this->game->quadtree_2->insertAllDecor(allDecor2);
+        //this->game->quadtree_2->insertAllDecor(allDecor2);
 
         //bonnes coordonnées pour level 1:
         //thomas_the_player = new Player(0., 0., 2., 4., Color(0.3, 0.4, 0.5), 1);
@@ -35,11 +37,15 @@ public :
         
         thomas_the_mover_1 = new Player(0., 0., 2., 4., Color(0.3, 0.4, 0.5), 1);
 
-        thomas_the_winner_1 = new Player(-9., 0., thomas_the_mover_1->height, thomas_the_mover_1->width, Color(1., 1., 1.), 0);
+        thomas_the_winner_1 = new Player(-20., 24., thomas_the_mover_1->height, thomas_the_mover_1->width, Color(1., 1., 1.), 0);
 
-        thomas_the_mover_2 = new Player(-5., 0., 3., 6., Color(0.7, 0.1, 0.5), 1);
+        thomas_the_mover_2 = new Player(-8., 0., 3., 6., Color(0.7, 0.1, 0.5), 1);
 
-        thomas_the_winner_2 = new Player(12., 0., thomas_the_mover_2->height, thomas_the_mover_2->width, Color(1., 1., 1.), 0);
+        thomas_the_winner_2 = new Player(-17., 17., thomas_the_mover_2->height, thomas_the_mover_2->width, Color(1., 1., 1.), 0);
+
+        thomas_the_mover_3 = new Player(0., 0., 2., 4., Color(0.3, 0.4, 0.5), 1);
+
+        thomas_the_winner_3 = new Player(-25., 17., thomas_the_mover_3->height, thomas_the_mover_3->width, Color(1., 1., 1.), 0);
 
         thomas_the_player = thomas_the_mover_1;
 
@@ -59,7 +65,9 @@ public :
 
     void changePlayer();
 
+    void move(int direction);
 
+    void move2(int direction);
 
 
 
@@ -70,10 +78,10 @@ public :
 
     Color colorbox;
 
-    float X2[MAX_DECOR_COUNT];
-    float Y2[MAX_DECOR_COUNT];
-    float H2[MAX_DECOR_COUNT];
-    float W2[MAX_DECOR_COUNT];
+    float X2[MAX_DECOR_COUNT_2];
+    float Y2[MAX_DECOR_COUNT_2];
+    float H2[MAX_DECOR_COUNT_2];
+    float W2[MAX_DECOR_COUNT_2];
 
     bool isActive() {
         if (game->gaming()) {
@@ -95,6 +103,10 @@ public :
 
     Player* thomas_the_winner_2;
 
+    Player* thomas_the_mover_3;
+
+    Player* thomas_the_winner_3;
+
     Player* thomas_the_player;
 
 
@@ -105,7 +117,7 @@ public :
 private :
 
     AABB allDecor1[MAX_DECOR_COUNT];
-    AABB allDecor2[MAX_DECOR_COUNT];
+    AABB allDecor2[MAX_DECOR_COUNT_2];
 
     Map* map;
 };

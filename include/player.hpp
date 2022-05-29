@@ -6,6 +6,10 @@ const int MOVE_LEFT = 1;
 const int MOVE_RIGHT = 2;
 const int JUMP = 3;
 const int DOWN = 4;
+const int NONE = 0;
+
+const int MOVE = 10;
+const int RETURN = 20;
 
 
 
@@ -24,7 +28,7 @@ public:
 
     void drawPlayer();
 
-    void updateThomasPosition(int direction);
+    void updateThomasPosition(int direction, float d);
 
     void jump(int floor);
 
