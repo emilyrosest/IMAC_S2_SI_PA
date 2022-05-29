@@ -21,6 +21,7 @@ bool collision(AABB box1, AABB box2);
 
 //const int MAX_DECOR_COUNT = 32;
 const int MAX_DECOR_COUNT = 78;
+const int MAX_DECOR_COUNT_2 = 108;
 
 
 class QuadTree {
